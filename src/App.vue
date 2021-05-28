@@ -6,6 +6,8 @@
 export default {
   name: 'App',
   components: {},
+  mounted() {},
+  methods: {},
 };
 </script>
 
