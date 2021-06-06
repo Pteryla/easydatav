@@ -1,8 +1,9 @@
 <template>
-  <div class="e-logo">iEasyDataV</div>
+  <div class="e-logo">MyDataV</div>
 </template>
 
 <script>
+// iEasyDataV
 export default {
   name: 'ELogo',
   setup() {},

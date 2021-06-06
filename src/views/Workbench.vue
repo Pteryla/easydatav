@@ -4,30 +4,46 @@
       <el-header height="60px">
         <e-logo></e-logo>
         <div class="workbench-controllers">
-          <el-button type="primary" size="mini">
-            <i class="el-icon-refresh-left"></i>
-            撤销</el-button
-          >
-          <el-button type="primary" size="mini">
-            <i class="el-icon-refresh-right"></i>
-            恢复</el-button
-          >
-          <el-button type="primary" size="mini">
-            <i class="el-icon-finished"></i>
-            保存</el-button
-          >
-          <el-button type="primary" size="mini">
-            <i class="el-icon-monitor"></i>
-            预览</el-button
-          >
-          <el-button type="primary" size="mini">
-            <i class="el-icon-s-promotion"></i>
-            发布</el-button
-          >
-          <el-button type="primary" size="mini">
-            <i class="el-icon-switch-button"></i>
-            退出</el-button
-          >
+          <div class="operators">
+            <el-button type="primary" size="mini">
+              <i class="el-icon-back"></i>
+            </el-button>
+            <el-button type="primary" size="mini">
+              <i class="el-icon-right"></i>
+            </el-button>
+            <el-button type="primary" size="mini"> 保存 </el-button>
+          </div>
+
+          <div class="screen-controller">
+            <span>屏幕尺寸</span><span><el-input size="mini" v-model="screen.width" placeholder=""></el-input></span>
+            <span>x</span
+            ><span
+              ><el-input size="mini" v-model="screen.height" placeholder=""></el-input>
+              <span>Px</span>
+            </span>
+
+            <span>
+              <el-button type="primary" size="mini"> <i class="el-icon-zoom-in"></i> </el-button
+            ></span>
+            <span> <el-input size="mini" v-model="screen.ratio" placeholder=""></el-input><span>%</span> </span>
+            <span>
+              <el-button type="primary" size="mini"> <i class="el-icon-zoom-out"></i> </el-button
+            ></span>
+          </div>
+          <div class="controllers">
+            <el-button type="primary" size="mini">
+              <i class="el-icon-monitor"></i>
+              预览</el-button
+            >
+            <el-button type="primary" size="mini">
+              <i class="el-icon-s-promotion"></i>
+              发布</el-button
+            >
+            <el-button type="primary" size="mini">
+              <i class="el-icon-switch-button"></i>
+              退出</el-button
+            >
+          </div>
         </div>
       </el-header>
       <el-container>
@@ -63,6 +79,11 @@
                 </div>
               </div>
             </div>
+            <div class="screen-container">
+              <div class="screen-wrapper">
+                <div class="screen">haha</div>
+              </div>
+            </div>
           </div>
         </el-main>
         <el-aside width="260px"
@@ -94,6 +115,11 @@ export default {
       rulerUnit: 100,
       rulerTopItemList: [],
       rulerLeftItemList: [],
+      screen: {
+        width: 100,
+        height: 100,
+        ratio: 100,
+      },
     };
   },
   created() {},
@@ -132,27 +158,88 @@ export default {
 .workbench {
   width: 100%;
   height: 100%;
+  min-width: 800px;
   color: whitesmoke;
   font-size: $font-size-base;
-
   .el-container {
     width: 100%;
     height: 100%;
   }
   .el-header {
+    user-select: none;
     background-color: $background-color-main;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    box-sizing: border-box;
+    .workbench-controllers {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .operators {
+        margin-left: 40px;
+        .el-button {
+          font-size: 12px;
+          font-weight: bold;
+        }
+        .el-icon-back {
+          font-size: 14px;
+          font-weight: bold;
+        }
+        .el-icon-right {
+          font-size: 14px;
+          font-weight: bold;
+        }
+      }
+      .screen-controller {
+        display: flex;
+        align-items: center;
+        .el-icon-zoom-in {
+          font-size: 14px;
+          font-weight: bold;
+        }
+        .el-icon-zoom-out {
+          font-size: 14px;
+          font-weight: bold;
+        }
+        .el-input {
+          width: 50px;
+        }
+        span {
+          margin: 0 5px;
+        }
+        :deep() input {
+          color: #ffffff;
+          height: 24px;
+          padding: 0 4px;
+          background-color: $background-color-main;
+          border-radius: 0;
+          border-collapse: collapse;
+          text-align: center;
+          border-radius: 4px;
+          border: 0px solid rgb(51, 51, 51);
 
+          &:hover {
+            border: 1px solid #5f54be;
+          }
+          &:focus {
+            border: 1px solid #5f54be;
+          }
+        }
+      }
+    }
     .el-button {
       border-radius: 2px;
-      color: #dddddd;
+      color: #c7c7c7;
       border: 0;
-      background-color: #333;
+      background-color: $background-color-main;
+      transition: color 0.3s linear;
       &:hover {
-        background: linear-gradient(90deg, #01a3a8, #007ec7);
-        color: white;
+        // background: linear-gradient(90deg, #01a3a8, #007ec7);
+        color: #8394f5;
       }
     }
   }
@@ -175,6 +262,7 @@ export default {
         display: flex;
       }
       .el-tabs__item {
+        user-select: none;
         width: 100%;
         color: rgb(129, 129, 129);
         text-align: center;
@@ -184,8 +272,8 @@ export default {
         border-bottom: 0px;
       }
       .el-tabs__item.is-active {
-        color: #dadada;
-        border-bottom: 2px solid #cccccc;
+        color: #c7c7c7;
+        border-bottom: 1px solid #3f3f3f;
         background-color: #181818;
       }
       .el-tabs__content {
@@ -202,6 +290,9 @@ export default {
     background-color: #333;
     padding: 0;
     overflow: hidden;
+    box-sizing: border-box;
+    border-left: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(0, 0, 0);
     .ieasydatav—workbench {
       width: 100%;
       height: 100%;
@@ -230,9 +321,9 @@ export default {
               repeating-linear-gradient(90deg, #999 0, #999 1px, transparent 0, transparent 100%),
               repeating-linear-gradient(90deg, #999 0, #999 1px, transparent 0, transparent 10%),
               -webkit-gradient(linear, left top, left bottom, from(#000), to(#000));
-            background-image: repeating-linear-gradient(90deg, #303133 0, #606266 1px, transparent 0, transparent 100%),
-              repeating-linear-gradient(90deg, #606266 0, #303133 1px),
-              repeating-linear-gradient(90deg, #303133 0px, #606266 1px, transparent 0, transparent 5%),
+            background-image: repeating-linear-gradient(90deg, #606266 0, #606266 1px, transparent 0, transparent 100%),
+              repeating-linear-gradient(90deg, #606266 0, #606266 1px),
+              repeating-linear-gradient(90deg, #606266 0px, #606266 1px, transparent 0, transparent 5%),
               linear-gradient($scale-rulers-background-color, $scale-rulers-background-color);
             background-position: 0em 100%, 50% 100%, 0 100%, 0 0, 0 0;
             background-size: 100% 100%, 1px 53%, 100% 3px, 100% 100%, 100% 100%;
@@ -282,7 +373,7 @@ export default {
               repeating-linear-gradient(180deg, #606266 0, #606266 1px, transparent 0, transparent 50%),
               repeating-linear-gradient(180deg, #606266 0px, #606266 1px, transparent 0, transparent 5%),
               linear-gradient($scale-rulers-background-color, $scale-rulers-background-color);
-            background-position: 0px 0px, 0px 100%, 0px 100%, 0px 0px, 0px 0px;
+            background-position: 0px 0px, 100% 100%, 100% 100%, 0px 0px, 0px 0px;
             background-size: 100% 284%, 40% 100%, 2px 100%, 100% 100%, 100% 100%;
             background-repeat: no-repeat;
 
@@ -294,8 +385,43 @@ export default {
               text-align: left;
               user-select: none;
               transform-origin: 0 33%;
-              margin-left: 16px;
+              margin-left: 10px;
             }
+          }
+        }
+      }
+      .screen-container {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+          z-index: 0 !important;
+          width: 2px;
+          height: 2px;
+          background-color: #141517;
+        }
+        &::-webkit-scrollbar-corner {
+          z-index: 0;
+          background-color: #141517;
+        }
+        &::-webkit-scrollbar-thumb {
+          width: 2px;
+          height: 2px;
+          z-index: 0 !important;
+          background-color: #909399;
+        }
+        .screen-wrapper {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          padding-bottom: 20px;
+          padding-right: 20px;
+          .screen {
+            width: 1000px;
+            height: 500px;
+            background-color: rgb(159, 164, 170);
           }
         }
       }
