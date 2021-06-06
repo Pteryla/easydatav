@@ -1,12 +1,10 @@
-import { createStore } from 'vuex'
-
+import { createStore } from 'vuex';
+import projects from './projects.js';
 export default createStore({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: {},
+  mutations: {},
+  actions: {},
   modules: {
-  }
-})
+    projects,
+  },
+});

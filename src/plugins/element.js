@@ -5,10 +5,13 @@ import {
   ElHeader,
   ElMain,
   ElMenu,
+  ElSubmenu,
   ElMenuItem,
   ElMenuItemGroup,
-  ElSubmenu,
+  ElTabs,
+  ElTabPane,
 } from 'element-plus';
+import '@/scss/element-variables.scss';
 import lang from 'element-plus/lib/locale/lang/zh-cn';
 import locale from 'element-plus/lib/locale';
 
@@ -23,4 +26,6 @@ export default app => {
   app.use(ElSubmenu);
   app.use(ElMenuItem);
   app.use(ElMenuItemGroup);
+  app.use(ElTabs);
+  app.use(ElTabPane);
 };

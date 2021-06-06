@@ -4,6 +4,8 @@
 
 <script>
 export default {
+  name: 'BaseTemplate',
+  components: {},
   setup() {},
   data() {
     return {};
@@ -13,6 +15,7 @@ export default {
   mounted() {},
   unmounted() {},
   watch: {},
+  computed: {},
   methods: {},
 };
 </script>

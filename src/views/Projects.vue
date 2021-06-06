@@ -5,61 +5,39 @@
         <e-logo></e-logo>
       </el-header>
       <el-container>
-        <el-aside width="280px">
+        <el-aside width="220px">
           <el-menu
-            :uniqueOpened="true"
-            default-active="2"
+            default-active="default_0"
             class="el-menu-vertical"
             @open="handleMenuOpen"
             @close="handleMenuClose"
-            background-color="#212121"
+            background-color="#191919"
             text-color="#fff"
             active-text-color="#ffd04b"
           >
-            <el-submenu index="1">
+            <el-submenu index="projects-collections">
               <template #title>
-                <i class="el-icon-location"></i>
-                <span>导航一</span>
+                <i class="el-icon-s-platform"></i>
+                <span>我的项目集</span>
               </template>
               <el-menu-item-group>
-                <template #title>分组一</template>
-                <el-menu-item index="1-1">选项1</el-menu-item>
-                <el-menu-item index="1-2">选项2</el-menu-item>
+                <el-menu-item :index="item.index" v-for="item in collections" :key="item.index">{{
+                  item.name
+                }}</el-menu-item>
               </el-menu-item-group>
-              <el-menu-item-group title="分组2">
-                <el-menu-item index="1-3">选项3</el-menu-item>
-              </el-menu-item-group>
-              <el-submenu index="1-4">
-                <template #title>选项4</template>
-                <el-menu-item index="1-4-1">选项1</el-menu-item>
-              </el-submenu>
             </el-submenu>
-            <el-menu-item index="2">
-              <i class="el-icon-menu"></i>
-              <template #title>导航二</template>
-            </el-menu-item>
-            <el-menu-item index="3" disabled>
-              <i class="el-icon-document"></i>
-              <template #title>导航三</template>
-            </el-menu-item>
-            <el-menu-item index="4">
-              <i class="el-icon-setting"></i>
-              <template #title>导航四</template>
-            </el-menu-item>
-            <el-submenu index="5">
+            <el-menu-item index="template">
+              <i class="el-icon-s-shop"></i>
               <template #title>
-                <i class="el-icon-location"></i>
-                <span>导航一</span>
+                <span>项目模版</span>
               </template>
-              <el-menu-item-group>
-                <template #title>分组一</template>
-                <el-menu-item index="5-1">选项1</el-menu-item>
-                <el-menu-item index="5-2">选项2</el-menu-item>
-              </el-menu-item-group>
-              <el-menu-item-group title="分组2">
-                <el-menu-item index="5-3">选项3</el-menu-item>
-              </el-menu-item-group>
-            </el-submenu>
+            </el-menu-item>
+            <el-menu-item index="config">
+              <i class="el-icon-s-tools"></i>
+              <template #title>
+                <span>配置</span>
+              </template>
+            </el-menu-item>
           </el-menu>
         </el-aside>
         <el-main></el-main>
@@ -72,6 +50,7 @@
 import ELogo from '@/components/commonComponents/ELogo.vue';
 // @ is an alias to /src
 
+import { mapState } from 'vuex';
 export default {
   name: 'Projects',
   components: { ELogo },
@@ -82,12 +61,21 @@ export default {
   },
   created() {},
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    console.log(this.$store.state);
+  },
   unmounted() {},
   watch: {},
   methods: {
-    handleMenuOpen() {},
+    handleMenuOpen(val) {
+      console.log(val);
+    },
     handleMenuClose() {},
+  },
+  computed: {
+    ...mapState({
+      collections: state => state.projects.collections,
+    }),
   },
 };
 </script>
@@ -96,6 +84,8 @@ export default {
 .projects {
   width: 100%;
   height: 100%;
+  background-color: $background-color-main;
+  color: whitesmoke;
   .el-container {
     width: 100%;
     height: 100%;
@@ -103,9 +93,19 @@ export default {
       background-color: $background-color-main;
     }
     .el-aside {
-      background-color: #181818;
-      .el-menu-vertical {
+      user-select: none;
+      background-color: #191919;
+      :deep().el-menu-vertical {
         border: 0px;
+        .el-menu-item-group__title {
+          padding: 0;
+        }
+        .el-submenu [class^='el-icon-'] {
+          vertical-align: text-top;
+        }
+        .el-menu-item [class^='el-icon-'] {
+          vertical-align: text-top;
+        }
       }
     }
     .el-main {

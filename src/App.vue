@@ -20,7 +20,5 @@ export default {
   height: 100%;
   width: 100%;
   overflow: hidden;
-  color: whitesmoke;
-  background-color: $background-color-main;
 }
 </style>
