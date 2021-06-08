@@ -15,66 +15,92 @@
         <span>屏幕尺寸</span><span><el-input size="mini" v-model="screenInfo.width" placeholder=""></el-input></span>
         <span>x</span
         ><span
-      ><el-input size="mini" v-model="screenInfo.height" placeholder=""></el-input>
-              <span>Px</span>
-            </span>
+          ><el-input size="mini" v-model="screenInfo.height" placeholder=""></el-input>
+          <span>Px</span>
+        </span>
         <span>
-              <el-button type="primary" size="mini"> <i class="el-icon-zoom-in"></i> </el-button
-              ></span>
+          <el-button type="primary" @click="screenInfo.ratio < 200 ? (screenInfo.ratio += 5) : ''" size="mini">
+            <i class="el-icon-zoom-in"></i> </el-button
+        ></span>
         <span> <el-input size="mini" v-model="screenInfo.ratio" placeholder=""></el-input><span>%</span> </span>
         <span>
-              <el-button type="primary" size="mini"> <i class="el-icon-zoom-out"></i> </el-button
-              ></span>
+          <el-button type="primary" @click="screenInfo.ratio > 30 ? (screenInfo.ratio -= 5) : ''" size="mini">
+            <i class="el-icon-zoom-out"></i> </el-button
+        ></span>
       </div>
       <div class="controllers">
         <el-button type="primary" size="mini">
           <i class="el-icon-monitor"></i>
           预览
-        </el-button
-        >
+        </el-button>
         <el-button type="primary" size="mini">
           <i class="el-icon-s-promotion"></i>
           发布
-        </el-button
-        >
+        </el-button>
         <el-button type="primary" size="mini">
           <i class="el-icon-switch-button"></i>
           退出
-        </el-button
-        >
+        </el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import ELogo from "../commonComponents/ELogo";
-
+import ELogo from '../commonComponents/ELogo';
+import { mapState, mapMutations } from 'vuex';
 export default {
   name: 'WorkbenchHeader',
-  components: {ELogo},
-  setup() {
-  },
+  components: { ELogo },
+  setup() {},
   data() {
     return {
       screenInfo: {
-        width: 100,
-        height: 100,
-        ratio: 100,
+        width: 0,
+        height: 0,
+        ratio: 0,
       },
+      isFinishedInit: false,
     };
   },
   created() {
+    this.init();
   },
-  beforeMount() {
+  beforeMount() {},
+  mounted() {},
+  unmounted() {},
+  watch: {
+    screenInfo: {
+      deep: true,
+      handler: function (newScreenInfo) {
+        if (this.isFinishedInit) {
+          this.set_size({
+            width: newScreenInfo.width,
+            height: newScreenInfo.height,
+          });
+          this.set_sizeRatio({
+            widthRatio: newScreenInfo.ratio,
+            heightRatio: newScreenInfo.ratio,
+          });
+        }
+      },
+    },
   },
-  mounted() {
+  computed: {
+    ...mapState({
+      screen: state => state.workbench.screen,
+    }),
   },
-  unmounted() {
+  methods: {
+    ...mapMutations(['set_size', 'set_sizeRatio']),
+    init() {
+      let { size, sizeRatio } = this.screen;
+      this.screenInfo.width = size.width;
+      this.screenInfo.height = size.height;
+      this.screenInfo.ratio = sizeRatio.widthRatio;
+      this.isFinishedInit = true;
+    },
   },
-  watch: {},
-  computed: {},
-  methods: {},
 };
 </script>
 
@@ -87,6 +113,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   .workbench-controllers {
     width: 100%;
     height: 100%;
@@ -129,7 +156,8 @@ export default {
       .el-input {
         width: 50px;
       }
-      .el-button{
+
+      .el-button {
         padding: 0 10px;
       }
 
@@ -167,10 +195,12 @@ export default {
     border: 0;
     background: $background-color-main;
     &:hover {
-       background: linear-gradient(90deg, #6557d8, #a628d3);
+      background: linear-gradient(90deg, #6557d8, #a628d3);
       color: #e9e9e9;
     }
+    &:active {
+      background: linear-gradient(90deg, #796bf8, #ca45fa);
+    }
   }
-
 }
 </style>

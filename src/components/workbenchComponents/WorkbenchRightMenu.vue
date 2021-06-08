@@ -1,6 +1,6 @@
 <template>
   <div class="WorkbenchRightMenu">
-    <el-tabs v-model="activeLeftTabName" type="card" @tab-click="handleRightTabClick">
+    <el-tabs v-model="activeRightTabName" type="card" @tab-click="handleRightTabClick">
       <el-tab-pane label="样式" name="style"></el-tab-pane>
       <el-tab-pane label="数据" name="data"></el-tab-pane>
       <el-tab-pane label="事件" name="events"></el-tab-pane>
@@ -26,8 +26,7 @@ export default {
   watch: {},
   computed: {},
   methods: {
-    handleRightTabClick() {
-    },
+    handleRightTabClick() {},
   },
 };
 </script>
@@ -81,6 +80,5 @@ export default {
       }
     }
   }
-
 }
 </style>
