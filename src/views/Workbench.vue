@@ -67,7 +67,6 @@ export default {
   .el-header {
     padding: 0;
     border-bottom: 1px solid rgb(0, 0, 0);
-    user-select: none;
     box-sizing: border-box;
     background-color: $background-color-main;
   }

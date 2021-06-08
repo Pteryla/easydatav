@@ -1,7 +1,11 @@
 <template>
   <div class="WorkbenchLeftMenu">
     <el-tabs v-model="activeLeftTabName" type="card" @tab-click="handleRightTabClick">
-      <el-tab-pane label="图层" name="layers"></el-tab-pane>
+      <el-tab-pane label="图层" name="layers">
+        <el-tooltip class="item-pop" effect="dark" content="Bottom Center 提示文字" placement="bottom">
+          <el-button>下边</el-button>
+        </el-tooltip>
+      </el-tab-pane>
       <el-tab-pane label="组件" name="components"></el-tab-pane>
       <el-tab-pane label="场景" name="scenery"></el-tab-pane>
       <el-tab-pane label="模板" name="templates"></el-tab-pane>

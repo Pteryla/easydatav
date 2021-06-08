@@ -10,8 +10,9 @@ import {
   ElMenuItemGroup,
   ElTabs,
   ElTabPane,
-  ElTooltip,
   ElPopper,
+  ElPopover,
+  ElTooltip,
   ElInput,
 } from 'element-plus';
 import '@/scss/element-variables.scss';
@@ -31,7 +32,8 @@ export default app => {
   app.use(ElMenuItemGroup);
   app.use(ElTabs);
   app.use(ElTabPane);
-  app.use(ElTooltip);
   app.use(ElPopper);
+  app.use(ElPopover);
+  app.use(ElTooltip);
   app.use(ElInput);
 };

@@ -6,10 +6,12 @@
         <el-button type="primary" size="mini">
           <i class="el-icon-back"></i>
         </el-button>
+
         <el-button type="primary" size="mini">
           <i class="el-icon-right"></i>
         </el-button>
-        <el-button type="primary" size="mini"> 保存</el-button>
+
+        <el-button type="primary" size="mini">保存</el-button>
       </div>
       <div class="screen-controller">
         <span>屏幕尺寸</span><span><el-input size="mini" v-model="screenInfo.width" placeholder=""></el-input></span>
