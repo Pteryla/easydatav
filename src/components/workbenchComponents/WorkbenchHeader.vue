@@ -99,7 +99,6 @@ export default {
 
       .el-button {
         font-size: 12px;
-        font-weight: bold;
       }
 
       .el-icon-back {
@@ -130,13 +129,19 @@ export default {
       .el-input {
         width: 50px;
       }
+      .el-button{
+        padding: 0 10px;
+      }
 
       span {
+        color: #bdbdbd;
+        height: 28px;
+        line-height: 28px;
         margin: 0 5px;
       }
 
       :deep() input {
-        color: #ffffff;
+        color: #bdbdbd;
         height: 24px;
         padding: 0 4px;
         background-color: $background-color-main;
@@ -146,11 +151,11 @@ export default {
         border: 1px solid #2a2a2a;
 
         &:hover {
-          border: 1px solid #5f54be;
+          border: 1px solid #936eff;
         }
 
         &:focus {
-          border: 1px solid #5f54be;
+          border: 1px solid #ac60ff;
         }
       }
     }
@@ -158,14 +163,12 @@ export default {
 
   .el-button {
     border-radius: 2px;
-    color: #c7c7c7;
+    color: #bdbdbd;
     border: 0;
-    background-color: $background-color-main;
-    transition: color 0.3s linear;
-
+    background: $background-color-main;
     &:hover {
-      // background: linear-gradient(90deg, #01a3a8, #007ec7);
-      color: #8394f5;
+       background: linear-gradient(90deg, #6557d8, #a628d3);
+      color: #e9e9e9;
     }
   }
 

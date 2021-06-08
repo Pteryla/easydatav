@@ -6,7 +6,7 @@
         <workbench-header></workbench-header>
       </el-header>
       <el-container>
-        <el-aside width="260px">
+        <el-aside width="270px">
           <workbench-left-menu></workbench-left-menu>
         </el-aside>
         <el-main>
@@ -40,7 +40,7 @@
             </div>
           </div>
         </el-main>
-        <el-aside width="260px">
+        <el-aside width="270px">
           <workbench-right-menu></workbench-right-menu>
         </el-aside>
       </el-container>
@@ -64,8 +64,6 @@ export default {
   },
   data() {
     return {
-
-
       screenSizeRatio: 100,
       rulerUnit: 100,
       rulerTopItemList: [],
@@ -118,7 +116,7 @@ export default {
 .workbench {
   width: 100%;
   height: 100%;
-  min-width: 800px;
+  min-width: 980px;
   color: whitesmoke;
   font-size: $font-size-base;
 
