@@ -163,13 +163,21 @@ export default {
           -moz-user-select: none;
           -ms-user-select: none;
           user-select: none;
-          background-image: repeating-linear-gradient(90deg, #606266 0, #606266 1px, transparent 0, transparent 100%),
-            repeating-linear-gradient(90deg, #606266 0, #606266 1px),
+
+          background-image: repeating-linear-gradient(
+              90deg,
+              #606266 0px,
+              #606266 1px,
+              transparent 0px,
+              transparent 100%
+            ),
+            repeating-linear-gradient(90deg, #606266 0, #606266 1px, transparent 0, transparent 0%),
             repeating-linear-gradient(90deg, #606266 0px, #606266 1px, transparent 0, transparent 5%),
             linear-gradient($scale-rulers-background-color, $scale-rulers-background-color);
-          background-position: 0em 100%, 50% 100%, 0 100%, 0 0, 0 0;
-          background-size: 100% 100%, 1px 53%, 100% 3px, 100% 100%, 100% 100%;
+          background-position: 0 100%, 50.5% 100%, 0 100%, 0 0, 0 0;
+          background-size: 100% 100%, 1px 40%, 100% 2px, 100% 100%, 100% 100%;
           background-repeat: no-repeat;
+
           & p {
             padding: 0;
             transform: scale(0.8);
