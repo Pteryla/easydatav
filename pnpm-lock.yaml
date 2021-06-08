@@ -17,6 +17,7 @@ specifiers:
   lodash: ^4.17.21
   node-sass: ^4.12.0
   sass-loader: ^8.0.2
+  tinycolor2: ^1.4.2
   vue: ^3.0.0
   vue-axios: ^3.2.4
   vue-cli-plugin-element-plus: ^0.0.13
@@ -28,6 +29,7 @@ dependencies:
   core-js: registry.nlark.com/core-js/3.14.0
   element-plus: registry.nlark.com/element-plus/1.0.2-beta.46_vue@3.1.1
   lodash: 4.17.21
+  tinycolor2: 1.4.2
   vue: registry.nlark.com/vue/3.1.1
   vue-axios: registry.nlark.com/vue-axios/3.2.4_axios@0.21.1+vue@3.1.1
   vue-router: registry.nlark.com/vue-router/4.0.8_vue@3.1.1
@@ -39,7 +41,7 @@ devDependencies:
   '@vue/cli-plugin-eslint': registry.nlark.com/@vue/cli-plugin-eslint/4.5.13_a58cf9e4d577795b8c257bee96d49483
   '@vue/cli-plugin-router': registry.nlark.com/@vue/cli-plugin-router/4.5.13_@vue+cli-service@4.5.13
   '@vue/cli-plugin-vuex': registry.nlark.com/@vue/cli-plugin-vuex/4.5.13_@vue+cli-service@4.5.13
-  '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.13_@vue+compiler-sfc@3.1.1
+  '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.13_047d5ebf5483f01f1ab44cae212f9567
   '@vue/compiler-sfc': registry.nlark.com/@vue/compiler-sfc/3.1.1_vue@3.1.1
   babel-plugin-component: 1.1.1
   eslint: registry.nlark.com/eslint/6.8.0
@@ -2043,8 +2045,25 @@ packages:
   /debug/4.3.1:
     resolution: {integrity: sha1-8NIpxQXgxtjEmsVT0bE9wYP2su4=, tarball: debug/download/debug-4.3.1.tgz}
     engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.1.2
+    dev: true
+
+  /debug/4.3.1_supports-color@6.1.0:
+    resolution: {integrity: sha1-8NIpxQXgxtjEmsVT0bE9wYP2su4=, tarball: debug/download/debug-4.3.1.tgz}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      supports-color: registry.nlark.com/supports-color/6.1.0
     dev: true
 
   /decamelize/1.2.0:
@@ -5958,6 +5977,10 @@ packages:
     resolution: {integrity: sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q=, tarball: timsort/download/timsort-0.3.0.tgz}
     dev: true
 
+  /tinycolor2/1.4.2:
+    resolution: {integrity: sha1-P2pNEHGtB2dtf6Ry4frECnGdiAM=, tarball: tinycolor2/download/tinycolor2-1.4.2.tgz}
+    dev: false
+
   /tmp/0.0.33:
     resolution: {integrity: sha1-bTQzWIl2jSGyvNoKonfO07G/rfk=, tarball: tmp/download/tmp-0.0.33.tgz}
     engines: {node: '>=0.6.0'}
@@ -6184,6 +6207,9 @@ packages:
     peerDependencies:
       file-loader: '*'
       webpack: ^4.0.0
+    peerDependenciesMeta:
+      file-loader:
+        optional: true
     dependencies:
       file-loader: 4.3.0_webpack@4.46.0
       loader-utils: 1.4.0
@@ -6286,6 +6312,8 @@ packages:
       espree: 6.2.1
       esquery: 1.4.0
       lodash: 4.17.21
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /vue-hot-reload-api/2.3.4:
@@ -6508,6 +6536,8 @@ packages:
       json5: 2.2.0
       semver: 6.3.0
       source-map: 0.5.7
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/eslint-parser/7.14.4_eslint@6.8.0:
@@ -6598,6 +6628,8 @@ packages:
       lodash.debounce: 4.0.8
       resolve: 1.20.0
       semver: 6.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/helper-function-name/7.14.2:
@@ -6990,6 +7022,8 @@ packages:
       babel-plugin-polyfill-corejs3: registry.nlark.com/babel-plugin-polyfill-corejs3/0.2.2_@babel+core@7.14.3
       babel-plugin-polyfill-regenerator: registry.nlark.com/babel-plugin-polyfill-regenerator/0.2.2_@babel+core@7.14.3
       semver: 6.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/preset-env/7.14.4_@babel+core@7.14.3:
@@ -7074,6 +7108,8 @@ packages:
       babel-plugin-polyfill-regenerator: registry.nlark.com/babel-plugin-polyfill-regenerator/0.2.2_@babel+core@7.14.3
       core-js-compat: registry.nlark.com/core-js-compat/3.14.0
       semver: 6.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/runtime/7.14.0:
@@ -7338,6 +7374,11 @@ packages:
     version: 4.5.13
     peerDependencies:
       vue: ^2 || ^3.0.0-0
+    peerDependenciesMeta:
+      core-js:
+        optional: true
+      vue:
+        optional: true
     dependencies:
       '@babel/core': registry.nlark.com/@babel/core/7.14.3
       '@babel/helper-compilation-targets': registry.nlark.com/@babel/helper-compilation-targets/7.14.4_@babel+core@7.14.3
@@ -7356,6 +7397,8 @@ packages:
       core-js-compat: registry.nlark.com/core-js-compat/3.14.0
       semver: 6.3.0
       vue: registry.nlark.com/vue/3.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@vue/cli-overlay/4.5.13:
@@ -7374,14 +7417,17 @@ packages:
     dependencies:
       '@babel/core': registry.nlark.com/@babel/core/7.14.3
       '@vue/babel-preset-app': registry.nlark.com/@vue/babel-preset-app/4.5.13_vue@3.1.1
-      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.13_@vue+compiler-sfc@3.1.1
+      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.13_047d5ebf5483f01f1ab44cae212f9567
       '@vue/cli-shared-utils': registry.nlark.com/@vue/cli-shared-utils/4.5.13
       babel-loader: 8.2.2_105470dfa535e5f605a4a54ef7d81e87
       cache-loader: 4.1.0_webpack@4.46.0
       thread-loader: registry.nlark.com/thread-loader/2.1.3_webpack@4.46.0
       webpack: registry.nlark.com/webpack/4.46.0
     transitivePeerDependencies:
+      - supports-color
       - vue
+      - webpack-cli
+      - webpack-command
     dev: true
 
   registry.nlark.com/@vue/cli-plugin-eslint/4.5.13_a58cf9e4d577795b8c257bee96d49483:
@@ -7393,7 +7439,7 @@ packages:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
       eslint: '>= 1.6.0 < 7.0.0'
     dependencies:
-      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.13_@vue+compiler-sfc@3.1.1
+      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.13_047d5ebf5483f01f1ab44cae212f9567
       '@vue/cli-shared-utils': registry.nlark.com/@vue/cli-shared-utils/4.5.13
       eslint: registry.nlark.com/eslint/6.8.0
       eslint-loader: 2.2.1_eslint@6.8.0+webpack@4.46.0
@@ -7401,6 +7447,9 @@ packages:
       inquirer: registry.nlark.com/inquirer/7.3.3
       webpack: registry.nlark.com/webpack/4.46.0
       yorkie: 2.0.0
+    transitivePeerDependencies:
+      - webpack-cli
+      - webpack-command
     dev: true
 
   registry.nlark.com/@vue/cli-plugin-router/4.5.13_@vue+cli-service@4.5.13:
@@ -7411,7 +7460,7 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
     dependencies:
-      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.13_@vue+compiler-sfc@3.1.1
+      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.13_047d5ebf5483f01f1ab44cae212f9567
       '@vue/cli-shared-utils': registry.nlark.com/@vue/cli-shared-utils/4.5.13
     dev: true
 
@@ -7423,10 +7472,10 @@ packages:
     peerDependencies:
       '@vue/cli-service': ^3.0.0 || ^4.0.0-0
     dependencies:
-      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.13_@vue+compiler-sfc@3.1.1
+      '@vue/cli-service': registry.nlark.com/@vue/cli-service/4.5.13_047d5ebf5483f01f1ab44cae212f9567
     dev: true
 
-  registry.nlark.com/@vue/cli-service/4.5.13_@vue+compiler-sfc@3.1.1:
+  registry.nlark.com/@vue/cli-service/4.5.13_047d5ebf5483f01f1ab44cae212f9567:
     resolution: {integrity: sha1-oJ5oSoAWhLbiTlQUrTBlCXDuye0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@vue/cli-service/download/@vue/cli-service-4.5.13.tgz?cache=0&sync_timestamp=1620982140017&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcli-service%2Fdownload%2F%40vue%2Fcli-service-4.5.13.tgz}
     id: registry.nlark.com/@vue/cli-service/4.5.13
     name: '@vue/cli-service'
@@ -7435,7 +7484,27 @@ packages:
     hasBin: true
     peerDependencies:
       '@vue/compiler-sfc': ^3.0.0-beta.14
+      less-loader: '*'
+      pug-plain-loader: '*'
+      raw-loader: '*'
+      sass-loader: '*'
+      stylus-loader: '*'
       vue-template-compiler: ^2.0.0
+    peerDependenciesMeta:
+      '@vue/compiler-sfc':
+        optional: true
+      less-loader:
+        optional: true
+      pug-plain-loader:
+        optional: true
+      raw-loader:
+        optional: true
+      sass-loader:
+        optional: true
+      stylus-loader:
+        optional: true
+      vue-template-compiler:
+        optional: true
     dependencies:
       '@intervolga/optimize-cssnano-plugin': 1.0.6_webpack@4.46.0
       '@soda/friendly-errors-webpack-plugin': 1.8.0_webpack@4.46.0
@@ -7482,11 +7551,12 @@ packages:
       pnp-webpack-plugin: 1.6.4
       portfinder: 1.0.28
       postcss-loader: registry.nlark.com/postcss-loader/3.0.0
+      sass-loader: registry.nlark.com/sass-loader/8.0.2_node-sass@4.14.1
       ssri: registry.nlark.com/ssri/8.0.1
       terser-webpack-plugin: registry.nlark.com/terser-webpack-plugin/1.4.5_webpack@4.46.0
       thread-loader: registry.nlark.com/thread-loader/2.1.3_webpack@4.46.0
       url-loader: 2.3.0_file-loader@4.3.0+webpack@4.46.0
-      vue-loader: registry.nlark.com/vue-loader/15.9.7_css-loader@3.6.0+webpack@4.46.0
+      vue-loader: registry.nlark.com/vue-loader/15.9.7_0aadd186e864c83cab1284bae568d6ae
       vue-style-loader: 4.1.3
       webpack: registry.nlark.com/webpack/4.46.0
       webpack-bundle-analyzer: registry.nlark.com/webpack-bundle-analyzer/3.9.0
@@ -7495,6 +7565,10 @@ packages:
       webpack-merge: registry.nlark.com/webpack-merge/4.2.2
     optionalDependencies:
       vue-loader-v16: registry.nlark.com/vue-loader/16.2.0
+    transitivePeerDependencies:
+      - supports-color
+      - webpack-cli
+      - webpack-command
     dev: true
 
   registry.nlark.com/@vue/cli-shared-utils/4.5.13:
@@ -7714,6 +7788,8 @@ packages:
       '@babel/core': registry.nlark.com/@babel/core/7.14.3
       '@babel/helper-define-polyfill-provider': registry.nlark.com/@babel/helper-define-polyfill-provider/0.2.3_@babel+core@7.14.3
       semver: 6.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/babel-plugin-polyfill-corejs3/0.2.2_@babel+core@7.14.3:
@@ -7727,6 +7803,8 @@ packages:
       '@babel/core': registry.nlark.com/@babel/core/7.14.3
       '@babel/helper-define-polyfill-provider': registry.nlark.com/@babel/helper-define-polyfill-provider/0.2.3_@babel+core@7.14.3
       core-js-compat: registry.nlark.com/core-js-compat/3.14.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/babel-plugin-polyfill-regenerator/0.2.2_@babel+core@7.14.3:
@@ -7739,6 +7817,8 @@ packages:
     dependencies:
       '@babel/core': registry.nlark.com/@babel/core/7.14.3
       '@babel/helper-define-polyfill-provider': registry.nlark.com/@babel/helper-define-polyfill-provider/0.2.3_@babel+core@7.14.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/big.js/3.2.0:
@@ -8149,6 +8229,8 @@ packages:
       natural-compare: 1.4.0
       semver: 7.3.5
       vue-eslint-parser: 7.6.0_eslint@6.8.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/eslint-utils/1.4.3:
@@ -9202,6 +9284,13 @@ packages:
       node-sass: ^4.0.0
       sass: ^1.3.0
       webpack: ^4.36.0 || ^5.0.0
+    peerDependenciesMeta:
+      fibers:
+        optional: true
+      node-sass:
+        optional: true
+      sass:
+        optional: true
     dependencies:
       clone-deep: 4.0.1
       loader-utils: 1.4.0
@@ -9471,16 +9560,24 @@ packages:
     version: 0.0.13
     dev: true
 
-  registry.nlark.com/vue-loader/15.9.7_css-loader@3.6.0+webpack@4.46.0:
+  registry.nlark.com/vue-loader/15.9.7_0aadd186e864c83cab1284bae568d6ae:
     resolution: {integrity: sha1-FbBXdcPgw4QHZ5OTws5t9nOwEEQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/vue-loader/download/vue-loader-15.9.7.tgz}
     id: registry.nlark.com/vue-loader/15.9.7
     name: vue-loader
     version: 15.9.7
     peerDependencies:
+      cache-loader: '*'
       css-loader: '*'
+      vue-template-compiler: '*'
       webpack: ^3.0.0 || ^4.1.0 || ^5.0.0-0
+    peerDependenciesMeta:
+      cache-loader:
+        optional: true
+      vue-template-compiler:
+        optional: true
     dependencies:
       '@vue/component-compiler-utils': 3.2.0
+      cache-loader: 4.1.0_webpack@4.46.0
       css-loader: registry.nlark.com/css-loader/3.6.0_webpack@4.46.0
       hash-sum: 1.0.2
       loader-utils: 1.4.0
@@ -9594,13 +9691,17 @@ packages:
     hasBin: true
     peerDependencies:
       webpack: ^4.0.0 || ^5.0.0
+      webpack-cli: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
     dependencies:
       ansi-html: 0.0.7
       bonjour: 3.5.0
       chokidar: 2.1.8
       compression: 1.7.4
       connect-history-api-fallback: 1.6.0
-      debug: 4.3.1
+      debug: 4.3.1_supports-color@6.1.0
       del: 4.1.1
       express: 4.17.1
       html-entities: 1.4.0
@@ -9654,6 +9755,14 @@ packages:
     version: 4.46.0
     engines: {node: '>=6.11.5'}
     hasBin: true
+    peerDependencies:
+      webpack-cli: '*'
+      webpack-command: '*'
+    peerDependenciesMeta:
+      webpack-cli:
+        optional: true
+      webpack-command:
+        optional: true
     dependencies:
       '@webassemblyjs/ast': 1.9.0
       '@webassemblyjs/helper-module-context': 1.9.0
