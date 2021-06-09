@@ -28,7 +28,7 @@
       </div>
       <div class="screen-container">
         <div class="screen-wrapper" @mousedown="handleScreenMove($event)" :style="screenWrapperPosition">
-          <div class="screen" :style="screenStyle">haha</div>
+          <Screen :style="screenStyle"></Screen>
         </div>
       </div>
     </div>
@@ -37,9 +37,12 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
+import Screen from '@/components/commonComponents/Screen.vue';
 export default {
   name: 'WorkbenchScreen',
-  components: {},
+  components: {
+    Screen,
+  },
   setup() {},
   data() {
     return {
@@ -73,7 +76,7 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations(['set_position']),
+    ...mapMutations(['set_screenPosition']),
     setScaleRulers() {
       this.rulerTopItemList = [];
       this.rulerLeftItemList = [];
@@ -98,7 +101,7 @@ export default {
       let move = moveEvent => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
-        this.set_position({
+        this.set_screenPosition({
           left: currX - startX + startLeft,
           top: currY - startY + startTop,
         });
@@ -177,7 +180,6 @@ export default {
           background-position: 0 100%, 50.5% 100%, 0 100%, 0 0, 0 0;
           background-size: 100% 100%, 1px 40%, 100% 2px, 100% 100%, 100% 100%;
           background-repeat: no-repeat;
-
           & p {
             padding: 0;
             transform: scale(0.8);
@@ -235,7 +237,6 @@ export default {
         }
       }
     }
-
     .screen-container {
       width: 100%;
       height: 100%;

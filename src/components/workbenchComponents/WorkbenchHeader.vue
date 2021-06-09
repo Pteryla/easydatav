@@ -76,11 +76,11 @@ export default {
       deep: true,
       handler: function (newScreenInfo) {
         if (this.isFinishedInit) {
-          this.set_size({
+          this.set_screenSize({
             width: newScreenInfo.width,
             height: newScreenInfo.height,
           });
-          this.set_sizeRatio({
+          this.set_screenSizeRatio({
             widthRatio: newScreenInfo.ratio,
             heightRatio: newScreenInfo.ratio,
           });
@@ -94,7 +94,7 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations(['set_size', 'set_sizeRatio']),
+    ...mapMutations(['set_screenSize', 'set_screenSizeRatio']),
     init() {
       let { size, sizeRatio } = this.screen;
       this.screenInfo.width = size.width;
