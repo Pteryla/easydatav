@@ -2,26 +2,16 @@ const state = () => ({
   // echarts组件
   echarts: {
     barCharts: {
+      id: 'barCharts',
       name: '条形图',
       icon: '',
-      componentsDataSet: [
-        {
-          name: '条形图1',
-          icon: '',
-          componentName: 'EchartsBarChart1',
-          componentData: {
-            style: {
-              width: '100px',
-              height: '100px',
-              backgroundColor: '#ccc',
-              fontSize: '12px',
-            },
-            data: {},
-            events: {},
-            tasks: {},
-          },
-        },
-      ],
+      componentsDataSet: [],
+    },
+    pieCharts: {
+      id: 'pieCharts',
+      name: '条形图',
+      icon: '',
+      componentsDataSet: [],
     },
   },
   // 头部组件
