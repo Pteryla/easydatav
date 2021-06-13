@@ -76,7 +76,7 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations(['set_screenPosition']),
+    ...mapMutations(['workbench/setScreenPosition']),
     setScaleRulers() {
       this.rulerTopItemList = [];
       this.rulerLeftItemList = [];
@@ -101,7 +101,7 @@ export default {
       let move = moveEvent => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
-        this.set_screenPosition({
+        this['workbench/setScreenPosition']({
           left: currX - startX + startLeft,
           top: currY - startY + startTop,
         });
@@ -244,19 +244,20 @@ export default {
       overflow: auto;
       &::-webkit-scrollbar {
         z-index: 0 !important;
-        width: 2px;
-        height: 2px;
-        background-color: #141517;
+        width: 8px;
+        height: 8px;
+        background-color: rgba(255, 255, 255, 0);
       }
       &::-webkit-scrollbar-corner {
         z-index: 0;
-        background-color: #141517;
+        background-color: rgba(255, 255, 255, 0);
       }
       &::-webkit-scrollbar-thumb {
-        width: 2px;
-        height: 2px;
+        width: 8px;
+        height: 8px;
+        border-radius: 5px;
         z-index: 0 !important;
-        background-color: #909399;
+        background-color: rgb(99, 99, 99);
       }
       .screen-wrapper {
         position: absolute;

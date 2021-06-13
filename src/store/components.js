@@ -37,7 +37,7 @@ const getters = {};
 const actions = {};
 const mutations = {};
 export default {
-  namespace: true,
+  namespaced: true,
   state,
   getters,
   mutations,

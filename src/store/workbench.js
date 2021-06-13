@@ -62,28 +62,28 @@ const state = () => ({
 const getters = {};
 const actions = {};
 const mutations = {
-  set_screenPosition(state, position) {
+  setScreenPosition(state, position) {
     let { left, top } = position;
     state.screen.position.left = left;
     state.screen.position.top = top;
   },
-  set_screenSize(state, size) {
+  setScreenSize(state, size) {
     let { width, height } = size;
     state.screen.size.width = width;
     state.screen.size.height = height;
   },
-  set_screenSizeRatio(state, sizeRatio) {
+  setScreenSizeRatio(state, sizeRatio) {
     let { widthRatio, heightRatio } = sizeRatio;
     state.screen.sizeRatio.widthRatio = widthRatio;
     state.screen.sizeRatio.heightRatio = heightRatio;
   },
-  set_screenBackgroundColor(state, color) {
+  setScreenBackgroundColor(state, color) {
     state.screen.backgroundColor = color;
   },
 };
 
 export default {
-  namespace: true,
+  namespaced: true,
   state,
   getters,
   mutations,

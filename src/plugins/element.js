@@ -1,6 +1,9 @@
 import {
-  ElAside,
   ElButton,
+  ElTooltip,
+  ElPopper,
+  ElInput,
+  ElAside,
   ElContainer,
   ElHeader,
   ElMain,
@@ -10,30 +13,24 @@ import {
   ElMenuItemGroup,
   ElTabs,
   ElTabPane,
-  // ElPopper,
-  // ElPopover,
-  // ElTooltip,
-  ElInput,
-} from 'element-plus';
-import '@/scss/element-variables.scss';
-import lang from 'element-plus/lib/locale/lang/zh-cn';
-import locale from 'element-plus/lib/locale';
+} from 'element-plus'
+import lang from 'element-plus/lib/locale/lang/zh-cn'
+import locale from 'element-plus/lib/locale'
 
-export default app => {
-  locale.use(lang);
-  app.use(ElButton);
-  app.use(ElContainer);
-  app.use(ElMain);
-  app.use(ElAside);
-  app.use(ElHeader);
-  app.use(ElMenu);
-  app.use(ElSubmenu);
-  app.use(ElMenuItem);
-  app.use(ElMenuItemGroup);
-  app.use(ElTabs);
-  app.use(ElTabPane);
-  // app.use(ElTooltip);
-  // app.use(ElPopper);
-  // app.use(ElPopover);
-  app.use(ElInput);
-};
+export default (app) => {
+  locale.use(lang)
+  app.use(ElPopper)
+  app.use(ElTooltip)
+  app.use(ElButton)
+  app.use(ElInput)
+  app.use(ElAside)
+  app.use(ElContainer)
+  app.use(ElHeader)
+  app.use(ElMain)
+  app.use(ElMenu)
+  app.use(ElSubmenu)
+  app.use(ElMenuItem)
+  app.use(ElMenuItemGroup)
+  app.use(ElTabs)
+  app.use(ElTabPane)
+}

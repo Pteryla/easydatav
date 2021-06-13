@@ -2,7 +2,7 @@
 <template>
   <div class="workbench">
     <el-container>
-      <el-header height="60px">
+      <el-header height="70px">
         <workbench-header></workbench-header>
       </el-header>
       <el-container>

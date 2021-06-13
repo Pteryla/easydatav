@@ -26,13 +26,13 @@ const state = () => ({
 const getters = {};
 const actions = {};
 const mutations = {
-  set_projectsCollections(state, val) {
+  setCollections(state, val) {
     state.collections = val;
   },
 };
 
 export default {
-  namespace: true,
+  namespaced: true,
   state,
   getters,
   mutations,

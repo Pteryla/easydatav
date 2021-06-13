@@ -76,11 +76,11 @@ export default {
       deep: true,
       handler: function (newScreenInfo) {
         if (this.isFinishedInit) {
-          this.set_screenSize({
+          this['workbench/setScreenSize']({
             width: newScreenInfo.width,
             height: newScreenInfo.height,
           });
-          this.set_screenSizeRatio({
+          this['workbench/setScreenSizeRatio']({
             widthRatio: newScreenInfo.ratio,
             heightRatio: newScreenInfo.ratio,
           });
@@ -94,7 +94,7 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations(['set_screenSize', 'set_screenSizeRatio']),
+    ...mapMutations(['workbench/setScreenSize', 'workbench/setScreenSizeRatio']),
     init() {
       let { size, sizeRatio } = this.screen;
       this.screenInfo.width = size.width;
