@@ -15,6 +15,7 @@ specifiers:
   eslint-plugin-vue: ^7.0.0
   node-sass: ^4.12.0
   sass-loader: ^8.0.2
+  screenfull: ^5.1.0
   vue: ^3.0.0
   vue-cli-plugin-element-plus: ^0.0.13
   vue-router: ^4.0.0-0
@@ -23,6 +24,7 @@ specifiers:
 dependencies:
   core-js: registry.nlark.com/core-js/3.14.0
   element-plus: registry.nlark.com/element-plus/1.0.2-beta.48_vue@3.1.1
+  screenfull: 5.1.0
   vue: registry.nlark.com/vue/3.1.1
   vue-router: registry.nlark.com/vue-router/4.0.8_vue@3.1.1
   vuex: registry.nlark.com/vuex/4.0.1_vue@3.1.1
@@ -4922,6 +4924,11 @@ packages:
       ajv-keywords: 3.5.2_ajv@6.12.6
     dev: true
 
+  /screenfull/5.1.0:
+    resolution: {integrity: sha1-hcE8cPTq1MG4qTXHABDf3NLA5cg=, tarball: screenfull/download/screenfull-5.1.0.tgz}
+    engines: {node: '>=0.10.0'}
+    dev: false
+
   /scss-tokenizer/0.2.3:
     resolution: {integrity: sha1-jrBtualyMzOCTT9VMGQRSYR85dE=, tarball: scss-tokenizer/download/scss-tokenizer-0.2.3.tgz}
     dependencies:
@@ -6144,6 +6151,8 @@ packages:
       '@babel/helper-optimise-call-expression': registry.nlark.com/@babel/helper-optimise-call-expression/7.14.5
       '@babel/helper-replace-supers': registry.nlark.com/@babel/helper-replace-supers/7.14.5
       '@babel/helper-split-export-declaration': registry.nlark.com/@babel/helper-split-export-declaration/7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/helper-create-regexp-features-plugin/7.14.5_@babel+core@7.14.5:
@@ -6260,6 +6269,8 @@ packages:
       '@babel/template': registry.nlark.com/@babel/template/7.14.5
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.14.5
       '@babel/types': registry.nlark.com/@babel/types/7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/helper-optimise-call-expression/7.14.5:
@@ -6299,6 +6310,8 @@ packages:
       '@babel/helper-optimise-call-expression': registry.nlark.com/@babel/helper-optimise-call-expression/7.14.5
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.14.5
       '@babel/types': registry.nlark.com/@babel/types/7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/helper-simple-access/7.14.5:
@@ -6362,6 +6375,8 @@ packages:
       '@babel/template': registry.nlark.com/@babel/template/7.14.5
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.14.5
       '@babel/types': registry.nlark.com/@babel/types/7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/highlight/7.14.5:
@@ -6424,6 +6439,8 @@ packages:
       '@babel/core': registry.nlark.com/@babel/core/7.14.5
       '@babel/helper-create-class-features-plugin': registry.nlark.com/@babel/helper-create-class-features-plugin/7.14.5_@babel+core@7.14.5
       '@babel/helper-plugin-utils': registry.nlark.com/@babel/helper-plugin-utils/7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-proposal-class-static-block/7.14.5_@babel+core@7.14.5:
@@ -6439,6 +6456,8 @@ packages:
       '@babel/helper-create-class-features-plugin': registry.nlark.com/@babel/helper-create-class-features-plugin/7.14.5_@babel+core@7.14.5
       '@babel/helper-plugin-utils': registry.nlark.com/@babel/helper-plugin-utils/7.14.5
       '@babel/plugin-syntax-class-static-block': registry.nlark.com/@babel/plugin-syntax-class-static-block/7.14.5_@babel+core@7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-proposal-decorators/7.14.5_@babel+core@7.14.5:
@@ -6454,6 +6473,8 @@ packages:
       '@babel/helper-create-class-features-plugin': registry.nlark.com/@babel/helper-create-class-features-plugin/7.14.5_@babel+core@7.14.5
       '@babel/helper-plugin-utils': registry.nlark.com/@babel/helper-plugin-utils/7.14.5
       '@babel/plugin-syntax-decorators': registry.nlark.com/@babel/plugin-syntax-decorators/7.14.5_@babel+core@7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-proposal-dynamic-import/7.14.5_@babel+core@7.14.5:
@@ -6598,6 +6619,8 @@ packages:
       '@babel/core': registry.nlark.com/@babel/core/7.14.5
       '@babel/helper-create-class-features-plugin': registry.nlark.com/@babel/helper-create-class-features-plugin/7.14.5_@babel+core@7.14.5
       '@babel/helper-plugin-utils': registry.nlark.com/@babel/helper-plugin-utils/7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-proposal-private-property-in-object/7.14.5_@babel+core@7.14.5:
@@ -6614,6 +6637,8 @@ packages:
       '@babel/helper-create-class-features-plugin': registry.nlark.com/@babel/helper-create-class-features-plugin/7.14.5_@babel+core@7.14.5
       '@babel/helper-plugin-utils': registry.nlark.com/@babel/helper-plugin-utils/7.14.5
       '@babel/plugin-syntax-private-property-in-object': registry.nlark.com/@babel/plugin-syntax-private-property-in-object/7.14.5_@babel+core@7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-proposal-unicode-property-regex/7.14.5_@babel+core@7.14.5:
@@ -6766,6 +6791,8 @@ packages:
       '@babel/helper-replace-supers': registry.nlark.com/@babel/helper-replace-supers/7.14.5
       '@babel/helper-split-export-declaration': registry.nlark.com/@babel/helper-split-export-declaration/7.14.5
       globals: registry.nlark.com/globals/11.12.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-transform-computed-properties/7.14.5_@babel+core@7.14.5:
@@ -6901,6 +6928,8 @@ packages:
       '@babel/helper-module-transforms': registry.nlark.com/@babel/helper-module-transforms/7.14.5
       '@babel/helper-plugin-utils': registry.nlark.com/@babel/helper-plugin-utils/7.14.5
       babel-plugin-dynamic-import-node: 2.3.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-transform-modules-commonjs/7.14.5_@babel+core@7.14.5:
@@ -6917,6 +6946,8 @@ packages:
       '@babel/helper-plugin-utils': registry.nlark.com/@babel/helper-plugin-utils/7.14.5
       '@babel/helper-simple-access': registry.nlark.com/@babel/helper-simple-access/7.14.5
       babel-plugin-dynamic-import-node: 2.3.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-transform-modules-systemjs/7.14.5_@babel+core@7.14.5:
@@ -6934,6 +6965,8 @@ packages:
       '@babel/helper-plugin-utils': registry.nlark.com/@babel/helper-plugin-utils/7.14.5
       '@babel/helper-validator-identifier': registry.nlark.com/@babel/helper-validator-identifier/7.14.5
       babel-plugin-dynamic-import-node: 2.3.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-transform-modules-umd/7.14.5_@babel+core@7.14.5:
@@ -6948,6 +6981,8 @@ packages:
       '@babel/core': registry.nlark.com/@babel/core/7.14.5
       '@babel/helper-module-transforms': registry.nlark.com/@babel/helper-module-transforms/7.14.5
       '@babel/helper-plugin-utils': registry.nlark.com/@babel/helper-plugin-utils/7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-transform-named-capturing-groups-regex/7.14.5_@babel+core@7.14.5:
@@ -6988,6 +7023,8 @@ packages:
       '@babel/core': registry.nlark.com/@babel/core/7.14.5
       '@babel/helper-plugin-utils': registry.nlark.com/@babel/helper-plugin-utils/7.14.5
       '@babel/helper-replace-supers': registry.nlark.com/@babel/helper-replace-supers/7.14.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/plugin-transform-parameters/7.14.5_@babel+core@7.14.5:

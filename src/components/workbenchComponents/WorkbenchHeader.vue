@@ -3,14 +3,21 @@
     <e-logo></e-logo>
     <div class="workbench-controllers">
       <div class="operators">
-        <el-button type="primary" size="mini">
-          <i class="el-icon-back"></i>
-        </el-button>
-
-        <el-button type="primary" size="mini">
-          <i class="el-icon-right"></i>
-        </el-button>
-
+        <el-tooltip content="撤销" :enterable="false" placement="bottom">
+          <el-button type="primary" size="mini">
+            <i class="el-icon-back"></i>
+          </el-button>
+        </el-tooltip>
+        <el-tooltip content="重做" :enterable="false" placement="bottom">
+          <el-button type="primary" size="mini">
+            <i class="el-icon-right"></i>
+          </el-button>
+        </el-tooltip>
+        <el-tooltip :content="isFullScreen === true ? '退出全屏' : '全屏'" :enterable="false" placement="bottom">
+          <el-button type="primary" size="mini" @click="toggleFullscreen">
+            <i :class="isFullScreen === true ? 'el-icon-copy-document' : 'el-icon-full-screen'"></i>
+          </el-button>
+        </el-tooltip>
         <el-button type="primary" size="mini">保存</el-button>
       </div>
       <div class="screen-controller">
@@ -49,8 +56,10 @@
 </template>
 
 <script>
+import screenfull from 'screenfull';
 import ELogo from '../commonComponents/ELogo';
 import { mapState, mapMutations } from 'vuex';
+
 export default {
   name: 'WorkbenchHeader',
   components: { ELogo },
@@ -63,6 +72,7 @@ export default {
         ratio: 0,
       },
       isFinishedInit: false,
+      isFullScreen: false,
     };
   },
   created() {
@@ -101,6 +111,11 @@ export default {
       this.screenInfo.height = size.height;
       this.screenInfo.ratio = sizeRatio.widthRatio;
       this.isFinishedInit = true;
+    },
+    toggleFullscreen() {
+      let targetDom = document.getElementById('workbench');
+      screenfull.toggle(targetDom);
+      this.isFullScreen = !this.isFullScreen;
     },
   },
 };
@@ -144,6 +159,7 @@ export default {
     .screen-controller {
       display: flex;
       align-items: center;
+      user-select: none;
 
       .el-icon-zoom-in {
         font-size: 14px;
@@ -196,10 +212,12 @@ export default {
     color: #bdbdbd;
     border: 0;
     background: $background-color-main;
+
     &:hover {
       background: linear-gradient(90deg, #6557d8, #a628d3);
       color: #e9e9e9;
     }
+
     &:active {
       background: linear-gradient(90deg, #796bf8, #ca45fa);
     }

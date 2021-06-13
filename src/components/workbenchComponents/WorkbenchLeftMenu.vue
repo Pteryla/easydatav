@@ -1,22 +1,34 @@
 <template>
   <div class="WorkbenchLeftMenu">
     <el-tabs v-model="activeLeftTabName" type="card" @tab-click="handleRightTabClick">
-      <el-tab-pane label="图层" name="layers"></el-tab-pane>
-      <el-tab-pane label="组件" name="components"></el-tab-pane>
-      <el-tab-pane label="场景" name="scenery"></el-tab-pane>
-      <el-tab-pane label="模板" name="templates"></el-tab-pane>
+      <el-tab-pane label="组件" name="components">
+        <Components></Components>
+      </el-tab-pane>
+      <el-tab-pane label="图层" name="layers">
+        <Layers></Layers>
+      </el-tab-pane>
+      <el-tab-pane label="场景" name="scenery">
+        <Scenery></Scenery>
+      </el-tab-pane>
+      <el-tab-pane label="模板" name="templates">
+        <Templates></Templates>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+import Components from './lefttTabMenus/Components';
+import Layers from './lefttTabMenus/Layers';
+import Scenery from './lefttTabMenus/Scenery';
+import Templates from './lefttTabMenus/Templates';
 export default {
   name: 'WorkbenchLeftMenu',
-  components: {},
+  components: { Templates, Scenery, Layers, Components },
   setup() {},
   data() {
     return {
-      activeLeftTabName: '',
+      activeLeftTabName: 'components',
     };
   },
   created() {},
@@ -46,6 +58,7 @@ export default {
       border-bottom: 0px solid #505050;
       background-color: rgb(32, 32, 32);
       margin: 0;
+      cursor: pointer;
     }
 
     .el-tabs__nav {

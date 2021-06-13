@@ -1,22 +1,34 @@
 <template>
   <div class="WorkbenchRightMenu">
     <el-tabs v-model="activeRightTabName" type="card" @tab-click="handleRightTabClick">
-      <el-tab-pane label="样式" name="style"></el-tab-pane>
-      <el-tab-pane label="数据" name="data"></el-tab-pane>
-      <el-tab-pane label="事件" name="events"></el-tab-pane>
-      <el-tab-pane label="任务" name="tasks"></el-tab-pane>
+      <el-tab-pane label="样式" name="style">
+        <Style></Style>
+      </el-tab-pane>
+      <el-tab-pane label="数据" name="data">
+        <Data></Data>
+      </el-tab-pane>
+      <el-tab-pane label="事件" name="events">
+        <Events></Events>
+      </el-tab-pane>
+      <el-tab-pane label="任务" name="tasks">
+        <Tasks></Tasks>
+      </el-tab-pane>
     </el-tabs>
   </div>
 </template>
 
 <script>
+import Style from './rightTabMenus/Style';
+import Data from './rightTabMenus/Data';
+import Events from './rightTabMenus/Events';
+import Tasks from './rightTabMenus/Tasks';
 export default {
   name: 'WorkbenchRightMenu',
-  components: {},
+  components: { Tasks, Events, Style, Data },
   setup() {},
   data() {
     return {
-      activeRightTabName: '',
+      activeRightTabName: 'style',
     };
   },
   created() {},
@@ -46,6 +58,7 @@ export default {
       border-bottom: 0px solid #505050;
       background-color: rgb(32, 32, 32);
       margin: 0;
+      cursor: pointer;
     }
 
     .el-tabs__nav {

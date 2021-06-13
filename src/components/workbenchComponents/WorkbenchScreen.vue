@@ -101,9 +101,13 @@ export default {
       let move = moveEvent => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
+        let left = currX - startX + startLeft;
+        let top = currY - startY + startTop;
+        if (top <= 20) top = 20;
+        if (left <= 20) left = 20;
         this['workbench/setScreenPosition']({
-          left: currX - startX + startLeft,
-          top: currY - startY + startTop,
+          left,
+          top,
         });
       };
       const up = () => {

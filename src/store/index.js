@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import projects from './projects.js';
 import workbench from './workbench.js';
-import components from './components.js';
+import screenComponents from './screenComponents.js';
 export default createStore({
   state: {},
   mutations: {},
@@ -9,6 +9,6 @@ export default createStore({
   modules: {
     projects,
     workbench,
-    components,
+    screenComponents,
   },
 });

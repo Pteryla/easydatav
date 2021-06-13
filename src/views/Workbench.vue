@@ -1,6 +1,6 @@
 <!--suppress ALL -->
 <template>
-  <div class="workbench">
+  <div class="workbench" id="workbench">
     <el-container>
       <el-header height="70px">
         <workbench-header></workbench-header>
@@ -35,7 +35,11 @@ export default {
   },
   setup() {},
   data() {
-    return {};
+    return {
+      fullscreen: false,
+      teleport: true,
+      pageOnly: false,
+    };
   },
   created() {},
   beforeMount() {},
