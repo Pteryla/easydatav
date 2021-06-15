@@ -3,8 +3,8 @@ const state = () => ({
   screen: {
     isMouseEnter: false,
     position: {
-      left: 20,
-      top: 20,
+      left: 100,
+      top: 100,
     },
     size: {
       width: 350,

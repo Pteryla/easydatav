@@ -21,8 +21,8 @@
         <el-button type="primary" size="mini">保存</el-button>
       </div>
       <div class="screen-controller">
-        <span>屏幕尺寸</span><span><el-input size="mini" v-model="screenInfo.width" placeholder=""></el-input></span>
-        <span>x</span
+        <span @click="makeScreenPositionCenter">屏幕尺寸</span
+        ><span><el-input size="mini" v-model="screenInfo.width" placeholder=""></el-input></span> <span>x</span
         ><span
           ><el-input size="mini" v-model="screenInfo.height" placeholder=""></el-input>
           <span>Px</span>
@@ -117,6 +117,14 @@ export default {
       screenfull.toggle(targetDom);
       this.isFullScreen = !this.isFullScreen;
     },
+    makeScreenPositionCenter() {
+      let ieasydatavDom = document.getElementById('ieasydatav—workbench');
+      if (ieasydatavDom) {
+        console.log(ieasydatavDom);
+        // let { offsetWidth, offsetHeight } = ieasydatavDom;
+        // console.log(`offsetWidth:${} ${}`);
+      }
+    },
   },
 };
 </script>
@@ -203,6 +211,11 @@ export default {
         &:focus {
           border: 1px solid #ac60ff;
         }
+      }
+    }
+    @media screen and (max-width: 1000px) {
+      .screen-controller {
+        display: none;
       }
     }
   }

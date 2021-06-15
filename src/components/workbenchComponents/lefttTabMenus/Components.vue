@@ -61,13 +61,14 @@ export default {
 
     .main-item {
       font-size: 14px;
+      letter-spacing: 1px;
       color: #c2c7c7;
       box-sizing: border-box;
       cursor: pointer;
       user-select: none;
       width: 100px;
-      height: 100px;
-      line-height: 100px;
+      height: 62px;
+      line-height: 62px;
       text-align: center;
       background-color: rgba(35, 35, 35, 0.89);
       margin-left: 22px;

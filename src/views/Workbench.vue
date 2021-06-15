@@ -59,7 +59,7 @@ export default {
 .workbench {
   width: 100%;
   height: 100%;
-  min-width: 980px;
+  // min-width: 980px;
   color: whitesmoke;
   font-size: $font-size-base;
 

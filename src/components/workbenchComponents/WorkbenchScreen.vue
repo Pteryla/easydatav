@@ -93,6 +93,7 @@ export default {
         }
       }
     },
+
     handleScreenMove(e) {
       const startY = e.clientY;
       const startX = e.clientX;
