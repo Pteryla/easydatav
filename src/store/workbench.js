@@ -38,6 +38,13 @@ const state = () => ({
       image: '',
       componentsData: [],
     },
+    {
+      id: 'default scene2',
+      name: '默认场景2s',
+      icon: '',
+      image: '',
+      componentsData: [],
+    },
   ],
   projectInfo: {
     // 项目名称
