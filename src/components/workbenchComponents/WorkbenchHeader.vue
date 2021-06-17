@@ -21,8 +21,17 @@
         <el-button type="primary" size="mini">保存</el-button>
       </div>
       <div class="screen-controller">
-        <span @click="makeScreenPositionCenter">屏幕尺寸</span
-        ><span><el-input size="mini" v-model="screenInfo.width" placeholder=""></el-input></span> <span>x</span
+        <el-button
+          type="primary"
+          class="guide-button"
+          style="border-radius: 50%"
+          size="mini"
+          @click="makeScreenPositionCenter"
+        >
+          <i class="el-icon-discover"></i>
+        </el-button>
+        <span>屏幕尺寸</span><span><el-input size="mini" v-model="screenInfo.width" placeholder=""></el-input></span>
+        <span>x</span
         ><span
           ><el-input size="mini" v-model="screenInfo.height" placeholder=""></el-input>
           <span>Px</span>
@@ -76,15 +85,17 @@ export default {
     };
   },
   created() {
-    this.init();
+    this.initScreenInfo();
   },
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    this.makeScreenPositionCenter();
+  },
   unmounted() {},
   watch: {
     screenInfo: {
       deep: true,
-      handler: function (newScreenInfo) {
+      handler: function(newScreenInfo) {
         if (this.isFinishedInit) {
           this['workbench/setScreenSize']({
             width: newScreenInfo.width,
@@ -104,8 +115,8 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations(['workbench/setScreenSize', 'workbench/setScreenSizeRatio']),
-    init() {
+    ...mapMutations(['workbench/setScreenSize', 'workbench/setScreenSizeRatio', 'workbench/setScreenPosition']),
+    initScreenInfo() {
       let { size, sizeRatio } = this.screen;
       this.screenInfo.width = size.width;
       this.screenInfo.height = size.height;
@@ -120,9 +131,18 @@ export default {
     makeScreenPositionCenter() {
       let ieasydatavDom = document.getElementById('ieasydatav—workbench');
       if (ieasydatavDom) {
-        console.log(ieasydatavDom);
-        // let { offsetWidth, offsetHeight } = ieasydatavDom;
-        // console.log(`offsetWidth:${} ${}`);
+        let { offsetWidth, offsetHeight } = ieasydatavDom;
+        let { size, sizeRatio } = this.screen;
+        let screenWidth = Math.round((size.width * sizeRatio.widthRatio) / 100);
+        let screenHeight = Math.round((size.height * sizeRatio.heightRatio) / 100);
+        let left = offsetWidth / 2 - screenWidth / 2;
+        let top = offsetHeight / 2 - screenHeight / 2;
+        if (left < 20) left = 20;
+        if (top < 20) top = 20;
+        this['workbench/setScreenPosition']({
+          left,
+          top,
+        });
       }
     },
   },
@@ -174,19 +194,23 @@ export default {
         font-weight: bold;
       }
 
+      .guide-button {
+        padding: 0 6px !important;
+        .el-icon-discover {
+          font-size: 18px;
+        }
+      }
       .el-icon-zoom-out {
         font-size: 14px;
         font-weight: bold;
       }
-
       .el-input {
         width: 50px;
       }
-
       .el-button {
         padding: 0 10px;
+        box-sizing: border-box;
       }
-
       span {
         color: #bdbdbd;
         height: 28px;
@@ -213,7 +237,7 @@ export default {
         }
       }
     }
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 1050px) {
       .screen-controller {
         display: none;
       }

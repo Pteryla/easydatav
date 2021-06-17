@@ -9,7 +9,7 @@ const state = () => ({
         id: 'barCharts',
         name: '条形图',
         icon: '',
-        componentsDataSet: [
+        subSet: [
           {
             edv_name: '条形图1',
             edv_icon: '',
@@ -52,9 +52,9 @@ const state = () => ({
       },
       pieCharts: {
         id: 'pieCharts',
-        name: '条形图',
+        name: '饼状图',
         icon: '',
-        componentsDataSet: [],
+        subSet: [],
       },
     },
   },
@@ -68,7 +68,7 @@ const state = () => ({
   // 按钮组件
   uis: {
     id: 'uis',
-    name: 'UI',
+    name: 'UI组件',
     icon: '',
     subSet: {},
   },
@@ -82,7 +82,7 @@ const state = () => ({
 
   // 场景切换组件
   scenerySwitchers: {
-    id: 'echarts',
+    id: 'scenerySwitchers',
     name: '场景切换',
     icon: '',
     subSet: {},

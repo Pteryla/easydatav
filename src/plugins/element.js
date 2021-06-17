@@ -13,6 +13,8 @@ import {
   ElMenuItemGroup,
   ElTabs,
   ElTabPane,
+  ElCollapse,
+  ElCollapseItem,
 } from 'element-plus'
 import lang from 'element-plus/lib/locale/lang/zh-cn'
 import locale from 'element-plus/lib/locale'
@@ -33,4 +35,6 @@ export default (app) => {
   app.use(ElMenuItemGroup)
   app.use(ElTabs)
   app.use(ElTabPane)
+  app.use(ElCollapse)
+  app.use(ElCollapseItem)
 }
