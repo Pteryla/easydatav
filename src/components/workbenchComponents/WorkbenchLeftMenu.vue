@@ -47,6 +47,7 @@ export default {
 .WorkbenchLeftMenu {
   width: 100%;
   height: 100%;
+
   :deep().el-tabs {
     width: 100%;
     height: 100%;
@@ -55,7 +56,7 @@ export default {
     flex-direction: column;
 
     .el-tabs__header {
-      border-bottom: 0px solid #505050;
+      border-bottom: 0 solid #505050;
       background-color: rgb(32, 32, 32);
       margin: 0;
       cursor: pointer;
@@ -63,7 +64,7 @@ export default {
 
     .el-tabs__nav {
       width: 100%;
-      border: 0px;
+      border: 0;
       display: flex;
     }
 

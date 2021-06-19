@@ -25,7 +25,7 @@
       </el-header>
       <el-main>
         <div class="sub-main-item" @click="handleAddComponent(item)" v-for="item in subSubData.subSet" :key="item.id">
-          {{ item.edv_name }}
+          {{ item.name }}
         </div>
       </el-main>
     </el-container>
@@ -33,7 +33,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
+
 export default {
   name: 'Components',
   components: {},
@@ -58,6 +59,7 @@ export default {
     }),
   },
   methods: {
+    ...mapMutations(['workbench/addComponentToCurrentScene']),
     handleChooseMainCate(data) {
       console.log(data);
       this.showCateName = 'sub-main';
@@ -67,8 +69,9 @@ export default {
       this.showCateName = 'sub-sub';
       this.subSubData = data;
     },
-    handleAddComponent(data) {
-      console.log(data);
+    handleAddComponent(component) {
+      console.log(component);
+      this['workbench/addComponentToCurrentScene'](component);
     },
   },
 };

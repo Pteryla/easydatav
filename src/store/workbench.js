@@ -1,7 +1,11 @@
+import { nanoid } from 'nanoid';
+import lodash from 'lodash';
+
 const state = () => ({
   // 编辑台屏幕信息
+  isMouseEnterWorkbench: true,
   screen: {
-    isMouseEnter: false,
+    isMouseEnter: true,
     position: {
       left: 100,
       top: 100,
@@ -69,23 +73,78 @@ const state = () => ({
 const getters = {};
 const actions = {};
 const mutations = {
+  // 设置screen组件位置
   setScreenPosition(state, position) {
-    let { left, top } = position;
+    const { left, top } = position;
     state.screen.position.left = left;
     state.screen.position.top = top;
   },
+  // 设置screen组件的大小
   setScreenSize(state, size) {
-    let { width, height } = size;
+    const { width, height } = size;
     state.screen.size.width = width;
     state.screen.size.height = height;
   },
+  // 设置screen组件的长宽缩放比例
   setScreenSizeRatio(state, sizeRatio) {
-    let { widthRatio, heightRatio } = sizeRatio;
+    const { widthRatio, heightRatio } = sizeRatio;
     state.screen.sizeRatio.widthRatio = widthRatio;
     state.screen.sizeRatio.heightRatio = heightRatio;
   },
+  // 设置screen组件的背景颜色
   setScreenBackgroundColor(state, color) {
     state.screen.backgroundColor = color;
+  },
+
+  addComponentToCurrentScene(state, component) {
+    // 添加组件 判断当前场景是否存在 以及鼠标是否在 workbench内
+    if (state?.currentScene?.componentsData && state.isMouseEnterWorkbench) {
+      // 深度拷贝
+      const addComponent = lodash.cloneDeep(component);
+      // 赋予一个id值
+      addComponent.id = nanoid();
+      // 添加到当前场景组件数组
+      state.currentScene.componentsData.push(addComponent);
+      // 更新组件图层是否可以调整
+      state.currentScene.componentsData.forEach((item, index) => {
+        if (index === 0) {
+          if (state.currentScene.componentsData.length === 1) {
+            item.canBeUpper = false;
+            item.canBeLower = false;
+          } else {
+            item.canBeUpper = true;
+            item.canBeLower = false;
+          }
+        } else if (index === state.currentScene.componentsData.length - 1) {
+          item.canBeUpper = false;
+          item.canBeLower = true;
+        } else {
+          item.canBeUpper = true;
+          item.canBeLower = true;
+        }
+      });
+      // 传递给当前组件数据
+      state.currentComponentData = addComponent;
+      console.log(state.currentScene.componentsData);
+    }
+  },
+  // 从当前场景中移除组件
+  removeComponentFromCurrentSceneById(state, id) {
+    if (state?.currentScene?.componentsData) {
+      const index = state.currentScene.componentsData.findIndex(item => item.id === id);
+      state.currentScene.componentsData.splice(index, 1);
+    }
+  },
+  // 从当前场景中移除所有组件
+  purgeAllComponentsFromCurrentScene(state) {
+    state.currentScene.componentsData = [];
+  },
+  // 设置当前显示场景
+  setCurrentSceneById(state, id) {
+    const targetScene = state.sceneryList.find(item => item.id === id);
+    if (targetScene) {
+      state.currentScene = targetScene;
+    }
   },
 };
 

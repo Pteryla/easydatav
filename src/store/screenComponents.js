@@ -11,12 +11,16 @@ const state = () => ({
         icon: '',
         subSet: [
           {
-            edv_name: '条形图1',
-            edv_icon: '',
-            edv_componentName: 'EdvBarChart1',
-            edv_id: '',
-            edv_style: {
+            name: '条形图1',
+            icon: '',
+            id: '',
+            canBeUpper: false,
+            canBeLower: false,
+            componentName: 'EdvBarChart1',
+            // 组件样式
+            componentStyle: {
               containerStyle: {
+                name: '容器样式',
                 width: 200,
                 height: 100,
                 left: 0,
@@ -24,18 +28,26 @@ const state = () => ({
                 backgroundColor: '#fff',
                 opacity: 1,
               },
+              echartsStyle: {
+                name: '图标样式',
+              },
             },
-            edv_data: {},
-            edv_events: {},
-            edv_tasks: {},
+            // 组件数据
+            componentData: {},
+            // 组件事件
+            componentEvents: {},
+            // 组件任务
+            componentTasks: {},
           },
           {
-            edv_name: '条形图2',
-            edv_icon: '',
-            edv_componentName: 'EdvBarChart2',
-            edv_id: '',
-            edv_style: {
+            name: '条形图2',
+            icon: '',
+            id: '',
+            componentName: 'EdvBarChart2',
+            // 组件样式
+            componentStyle: {
               containerStyle: {
+                name: '容器样式',
                 width: 200,
                 height: 100,
                 left: 0,
@@ -43,10 +55,16 @@ const state = () => ({
                 backgroundColor: '#fff',
                 opacity: 1,
               },
+              echartsStyle: {
+                name: '图标样式',
+              },
             },
-            edv_data: {},
-            edv_events: {},
-            edv_tasks: {},
+            // 组件数据
+            componentData: {},
+            // 组件事件
+            componentEvents: {},
+            // 组件任务
+            componentTasks: {},
           },
         ],
       },
