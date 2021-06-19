@@ -5,12 +5,12 @@
       <div class="operators">
         <el-tooltip content="撤销" :enterable="false" placement="bottom">
           <el-button type="primary" size="mini">
-            <i class="el-icon-back"></i>
+            <i class="el-icon-refresh-left"></i>
           </el-button>
         </el-tooltip>
         <el-tooltip content="重做" :enterable="false" placement="bottom">
           <el-button type="primary" size="mini">
-            <i class="el-icon-right"></i>
+            <i class="el-icon-refresh-right"></i>
           </el-button>
         </el-tooltip>
         <el-tooltip :content="isFullScreen === true ? '退出全屏' : '全屏'" :enterable="false" placement="bottom">
@@ -30,7 +30,7 @@
         >
           <i class="el-icon-discover"></i>
         </el-button>
-        <span>屏幕尺寸</span><span><el-input size="mini" v-model="screenInfo.width" placeholder=""></el-input></span>
+        <span>画布尺寸</span><span><el-input size="mini" v-model="screenInfo.width" placeholder=""></el-input></span>
         <span>x</span
         ><span
           ><el-input size="mini" v-model="screenInfo.height" placeholder=""></el-input>

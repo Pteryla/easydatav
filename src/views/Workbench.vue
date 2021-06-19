@@ -59,10 +59,8 @@ export default {
 .workbench {
   width: 100%;
   height: 100%;
-  // min-width: 980px;
   color: whitesmoke;
   font-size: $font-size-base;
-
   .el-container {
     width: 100%;
     height: 100%;

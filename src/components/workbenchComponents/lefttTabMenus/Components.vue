@@ -7,7 +7,10 @@
     </div>
 
     <el-container v-if="showCateName === 'sub-main'">
-      <el-header @click="showCateName = 'main'" height="35px">{{ subMainDate.name }}</el-header>
+      <el-header @click="showCateName = 'main'" height="35px">
+        <i class="el-icon-arrow-left"></i>
+        <span> {{ subMainDate.name }}</span>
+      </el-header>
       <el-main>
         <div class="sub-main-item" @click="handleChooseSubCate(item)" v-for="item in subMainDate.subSet" :key="item.id">
           {{ item.name }}
@@ -16,7 +19,10 @@
     </el-container>
 
     <el-container v-if="showCateName === 'sub-sub'">
-      <el-header @click="showCateName = 'sub-main'" height="35px">{{ subSubData.name }}</el-header>
+      <el-header @click="showCateName = 'sub-main'" height="35px">
+        <i class="el-icon-arrow-left"></i>
+        <span>{{ subSubData.name }}</span>
+      </el-header>
       <el-main>
         <div class="sub-main-item" @click="handleAddComponent(item)" v-for="item in subSubData.subSet" :key="item.id">
           {{ item.edv_name }}
@@ -82,6 +88,17 @@ export default {
       line-height: 35px;
       text-align: center;
       font-size: 14px;
+      position: relative;
+      .el-icon-arrow-left {
+        position: absolute;
+        cursor: pointer;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        &:hover {
+          color: rgb(235, 201, 14);
+        }
+      }
     }
     .el-main {
       padding: 0;

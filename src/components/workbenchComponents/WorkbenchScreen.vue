@@ -65,7 +65,7 @@ export default {
   watch: {
     screen: {
       deep: true,
-      handler: function () {
+      handler: function() {
         this.setScreenStyle();
       },
     },
@@ -260,9 +260,9 @@ export default {
       &::-webkit-scrollbar-thumb {
         width: 8px;
         height: 8px;
-        border-radius: 5px;
+        border-radius: 3px;
         z-index: 0 !important;
-        background-color: rgb(99, 99, 99);
+        background-color: rgb(65, 65, 65);
       }
       .screen-wrapper {
         position: absolute;
