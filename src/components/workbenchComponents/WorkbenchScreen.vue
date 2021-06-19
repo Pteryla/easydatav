@@ -1,5 +1,9 @@
 <template>
-  <div class="WorkbenchScreen">
+  <div
+    class="WorkbenchScreen"
+    @mouseenter="handleWorkbenchMouseEnterStatus(true)"
+    @mouseleave="handleWorkbenchMouseEnterStatus(false)"
+  >
     <div class="ieasydatav—workbench" id="ieasydatav—workbench">
       <div class="scale-rulers">
         <div class="ruler-top">
@@ -65,7 +69,7 @@ export default {
   watch: {
     screen: {
       deep: true,
-      handler: function() {
+      handler: function () {
         this.setScreenStyle();
       },
     },
@@ -76,7 +80,10 @@ export default {
     }),
   },
   methods: {
-    ...mapMutations(['workbench/setScreenPosition']),
+    ...mapMutations(['workbench/setScreenPosition', 'workbench/setMouseEnterWorkbenchStatus']),
+    handleWorkbenchMouseEnterStatus(status) {
+      this['workbench/setMouseEnterWorkbenchStatus'](status);
+    },
     setScaleRulers() {
       this.rulerTopItemList = [];
       this.rulerLeftItemList = [];

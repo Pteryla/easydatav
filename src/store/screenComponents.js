@@ -14,6 +14,8 @@ const state = () => ({
             name: '条形图1',
             icon: '',
             id: '',
+            // 层级索引
+            index: 0,
             canBeUpper: false,
             canBeLower: false,
             componentName: 'EdvBarChart1',
@@ -43,6 +45,9 @@ const state = () => ({
             name: '条形图2',
             icon: '',
             id: '',
+            index: 0,
+            canBeUpper: false,
+            canBeLower: false,
             componentName: 'EdvBarChart2',
             // 组件样式
             componentStyle: {

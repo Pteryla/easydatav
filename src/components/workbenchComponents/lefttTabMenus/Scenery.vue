@@ -1,7 +1,13 @@
 <template>
   <div class="Scenery" :style="`height:${realHeight}px`">
     <div class="scenery-list">
-      <div class="scene-item" @click="setCurrentScene(item)" v-for="item in sceneryList" :key="item.id">
+      <div
+        class="scene-item"
+        :class="{ active: currentSceneId === item.id }"
+        @click="setCurrentScene(item)"
+        v-for="item in sceneryList"
+        :key="item.id"
+      >
         <span class="scene-name"> {{ item.name }}</span>
       </div>
     </div>
@@ -9,7 +15,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 export default {
   name: 'Scenery',
   components: {},
@@ -23,28 +29,30 @@ export default {
   beforeMount() {},
   mounted() {
     console.log(this.sceneryList);
-    this.getRealHieght();
+    this.getRealHeight();
     window.addEventListener('resize', this.onResize);
   },
-  beforeUnmount() {
+  unmounted() {
     window.removeEventListener('resize', this.onResize);
   },
-  unmounted() {},
   watch: {},
   computed: {
     ...mapState({
       sceneryList: state => state.workbench.sceneryList,
+      currentSceneId: state => state.workbench.currentSceneId,
     }),
   },
   methods: {
-    getRealHieght() {
+    ...mapMutations(['workbench/setCurrentSceneById']),
+    getRealHeight() {
       this.realHeight = document.body.clientHeight - 110;
     },
     onResize() {
-      this.getRealHieght();
+      this.getRealHeight();
     },
     setCurrentScene(scene) {
       console.log(scene);
+      this['workbench/setCurrentSceneById'](scene.id);
     },
   },
 };
@@ -57,9 +65,9 @@ export default {
   box-sizing: border-box;
   overflow-y: auto;
   &::-webkit-scrollbar {
-    z-index: 0 !important;
     width: 8px;
     height: 8px;
+    z-index: 0 !important;
     background-color: rgba(255, 255, 255, 0);
   }
   &::-webkit-scrollbar-corner {
@@ -86,18 +94,24 @@ export default {
       margin-top: 20px;
     }
     .scene-item {
+      cursor: pointer;
       position: relative;
       width: 210px;
       border-radius: 5px;
       height: 120px;
       background: rgb(29, 29, 29);
       margin-top: 30px;
+      border-bottom: 2px solid #343434;
       .scene-name {
         position: absolute;
         top: 10px;
         left: 10px;
         color: #ccc;
       }
+    }
+    .active {
+      border-bottom: 2px solid rgb(87, 89, 236);
+      box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.24);
     }
   }
 }

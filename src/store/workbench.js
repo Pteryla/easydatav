@@ -3,9 +3,8 @@ import lodash from 'lodash';
 
 const state = () => ({
   // 编辑台屏幕信息
-  isMouseEnterWorkbench: true,
+  isMouseEnterWorkbench: false,
   screen: {
-    isMouseEnter: true,
     position: {
       left: 100,
       top: 100,
@@ -107,6 +106,7 @@ const mutations = {
       state.currentScene.componentsData.push(addComponent);
       // 更新组件图层是否可以调整
       state.currentScene.componentsData.forEach((item, index) => {
+        item.index = index;
         if (index === 0) {
           if (state.currentScene.componentsData.length === 1) {
             item.canBeUpper = false;
@@ -137,14 +137,20 @@ const mutations = {
   },
   // 从当前场景中移除所有组件
   purgeAllComponentsFromCurrentScene(state) {
-    state.currentScene.componentsData = [];
+    if (state?.currentScene?.componentsData && state?.currentScene?.componentsData.length >= 1) {
+      state.currentScene.componentsData = [];
+    }
   },
   // 设置当前显示场景
   setCurrentSceneById(state, id) {
     const targetScene = state.sceneryList.find(item => item.id === id);
     if (targetScene) {
       state.currentScene = targetScene;
+      state.currentSceneId = id;
     }
+  },
+  setMouseEnterWorkbenchStatus(state, status) {
+    state.isMouseEnterWorkbench = status;
   },
 };
 

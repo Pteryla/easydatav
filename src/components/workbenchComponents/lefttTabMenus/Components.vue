@@ -1,5 +1,5 @@
 <template>
-  <div class="Components">
+  <div class="Components" :style="`height:${realHeight}px`">
     <div class="main-category-components" v-if="showCateName === 'main'">
       <div class="main-item" v-for="item in allScreenComponents" :key="item.id" @click="handleChooseMainCate(item)">
         {{ item.name }}
@@ -11,7 +11,7 @@
         <i class="el-icon-arrow-left"></i>
         <span> {{ subMainDate.name }}</span>
       </el-header>
-      <el-main>
+      <el-main :style="`height:${realHeightMain}px`">
         <div class="sub-main-item" @click="handleChooseSubCate(item)" v-for="item in subMainDate.subSet" :key="item.id">
           {{ item.name }}
         </div>
@@ -23,8 +23,13 @@
         <i class="el-icon-arrow-left"></i>
         <span>{{ subSubData.name }}</span>
       </el-header>
-      <el-main>
-        <div class="sub-main-item" @click="handleAddComponent(item)" v-for="item in subSubData.subSet" :key="item.id">
+      <el-main :style="`height:${realHeightMain}px`">
+        <div
+          class="sub-main-item"
+          @mousedown="handleAddComponent(item)"
+          v-for="item in subSubData.subSet"
+          :key="item.id"
+        >
           {{ item.name }}
         </div>
       </el-main>
@@ -44,14 +49,21 @@ export default {
       showCateName: 'main',
       subMainDate: null,
       subSubData: null,
+      realHeight: 0,
+      realHeightMain: 0,
     };
   },
   created() {},
   beforeMount() {
     console.log(this.allScreenComponents);
   },
-  mounted() {},
-  unmounted() {},
+  mounted() {
+    this.getRealHeight();
+    window.addEventListener('resize', this.onResize);
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.onResize);
+  },
   watch: {},
   computed: {
     ...mapState({
@@ -60,6 +72,10 @@ export default {
   },
   methods: {
     ...mapMutations(['workbench/addComponentToCurrentScene']),
+    getRealHeight() {
+      this.realHeight = document.body.clientHeight - 110;
+      this.realHeightMain = document.body.clientHeight - 150;
+    },
     handleChooseMainCate(data) {
       console.log(data);
       this.showCateName = 'sub-main';
@@ -99,15 +115,14 @@ export default {
         top: 50%;
         transform: translateY(-50%);
         &:hover {
-          color: rgb(235, 201, 14);
+          color: #ccc;
         }
       }
     }
     .el-main {
-      padding: 0;
       display: flex;
       flex-wrap: wrap;
-      padding-top: 20px;
+      padding: 20px 0 0;
       .sub-main-item {
         font-size: 14px;
         letter-spacing: 1px;
