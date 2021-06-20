@@ -68,6 +68,7 @@ export default {
 
   .el-header {
     padding: 0;
+    box-sizing: border-box;
     border-bottom: 1px solid rgb(0, 0, 0);
     box-sizing: border-box;
     background-color: $background-color-main;
@@ -80,6 +81,7 @@ export default {
   .el-main {
     background-color: #333;
     padding: 0;
+    box-sizing: border-box;
     overflow: hidden;
     box-sizing: border-box;
     border-left: 1px solid rgb(0, 0, 0);

@@ -95,7 +95,7 @@ export default {
   watch: {
     screenInfo: {
       deep: true,
-      handler: function(newScreenInfo) {
+      handler: function (newScreenInfo) {
         if (this.isFinishedInit) {
           this['workbench/setScreenSize']({
             width: newScreenInfo.width,
@@ -135,8 +135,8 @@ export default {
         let { size, sizeRatio } = this.screen;
         let screenWidth = Math.round((size.width * sizeRatio.widthRatio) / 100);
         let screenHeight = Math.round((size.height * sizeRatio.heightRatio) / 100);
-        let left = offsetWidth / 2 - screenWidth / 2;
-        let top = offsetHeight / 2 - screenHeight / 2;
+        let left = Math.round(offsetWidth / 2 - screenWidth / 2);
+        let top = Math.round(offsetHeight / 2 - screenHeight / 2);
         if (left < 20) left = 20;
         if (top < 20) top = 20;
         this['workbench/setScreenPosition']({

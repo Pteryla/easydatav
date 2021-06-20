@@ -1,5 +1,6 @@
 <template>
   <div class="Screen">
+    <Shape></Shape>
     <el-tooltip content="Top center" placement="top">
       <el-button>Dark</el-button>
     </el-tooltip>
@@ -10,9 +11,10 @@
 </template>
 
 <script>
+import Shape from '../commonComponents/Shape';
 export default {
   name: 'Screen',
-  components: {},
+  components: { Shape },
   setup() {},
   data() {
     return {};

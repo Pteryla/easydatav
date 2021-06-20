@@ -23,14 +23,14 @@
         <i class="el-icon-arrow-left"></i>
         <span>{{ subSubData.name }}</span>
       </el-header>
-      <el-main :style="`height:${realHeightMain}px`">
+      <el-main :style="`height:${realHeightMain}px`" class="components-container">
         <div
-          class="sub-main-item"
-          @mousedown="handleAddComponent(item)"
+          class="component-item"
+          @mousedown="handleAddComponent($event, item)"
           v-for="item in subSubData.subSet"
           :key="item.id"
         >
-          {{ item.name }}
+          <span class="component-name"> {{ item.name }}</span>
         </div>
       </el-main>
     </el-container>
@@ -39,7 +39,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-
+import lodash from 'lodash';
 export default {
   name: 'Components',
   components: {},
@@ -68,6 +68,7 @@ export default {
   computed: {
     ...mapState({
       allScreenComponents: state => state.screenComponents,
+      screenPosition: state => state.workbench.screen.position,
     }),
   },
   methods: {
@@ -85,9 +86,21 @@ export default {
       this.showCateName = 'sub-sub';
       this.subSubData = data;
     },
-    handleAddComponent(component) {
-      console.log(component);
-      this['workbench/addComponentToCurrentScene'](component);
+    handleAddComponent(event, component) {
+      const addComponent = lodash.cloneDeep(component);
+      let move = () => {};
+      const up = upEvent => {
+        const { top: screenTop, left: screenLeft } = this.screenPosition;
+        addComponent.componentStyle.containerStyle.left = upEvent.clientX - 270 - screenLeft;
+        addComponent.componentStyle.containerStyle.top = upEvent.clientY - 70 - screenTop;
+        setTimeout(() => {
+          this['workbench/addComponentToCurrentScene'](addComponent);
+        }, 100);
+        document.removeEventListener('mousemove', move);
+        document.removeEventListener('mouseup', up);
+      };
+      document.addEventListener('mousemove', move);
+      document.addEventListener('mouseup', up);
     },
   },
 };
@@ -145,6 +158,27 @@ export default {
           box-shadow: 1px 1px 10px #151515;
           border: 1.5px solid #8063ff;
           color: #fff;
+        }
+      }
+    }
+    .components-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 25px 0 0;
+      .component-item {
+        user-select: none;
+        width: 220px;
+        height: 120px;
+        margin-bottom: 25px;
+        position: relative;
+        background: rgb(29, 29, 29);
+        border-radius: 5px;
+        .component-name {
+          position: absolute;
+          top: 10px;
+          left: 10px;
+          color: #ccc;
         }
       }
     }

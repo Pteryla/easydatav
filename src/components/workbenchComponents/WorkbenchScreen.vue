@@ -41,7 +41,9 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
+
 import Screen from '@/components/commonComponents/Screen.vue';
+
 export default {
   name: 'WorkbenchScreen',
   components: {

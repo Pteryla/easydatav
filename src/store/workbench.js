@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import lodash from 'lodash';
 
 const state = () => ({
   // 编辑台屏幕信息
@@ -98,12 +97,10 @@ const mutations = {
   addComponentToCurrentScene(state, component) {
     // 添加组件 判断当前场景是否存在 以及鼠标是否在 workbench内
     if (state?.currentScene?.componentsData && state.isMouseEnterWorkbench) {
-      // 深度拷贝
-      const addComponent = lodash.cloneDeep(component);
       // 赋予一个id值
-      addComponent.id = nanoid();
+      component.id = nanoid();
       // 添加到当前场景组件数组
-      state.currentScene.componentsData.push(addComponent);
+      state.currentScene.componentsData.push(component);
       // 更新组件图层是否可以调整
       state.currentScene.componentsData.forEach((item, index) => {
         item.index = index;
@@ -124,8 +121,8 @@ const mutations = {
         }
       });
       // 传递给当前组件数据
-      state.currentComponentData = addComponent;
-      console.log(state.currentScene.componentsData);
+      state.currentComponentData = component;
+      console.log(state.currentScene);
     }
   },
   // 从当前场景中移除组件

@@ -91,15 +91,15 @@ export default {
     box-sizing: border-box;
 
     .scene-item:first-child {
-      margin-top: 20px;
+      margin-top: 30px;
     }
     .scene-item {
       cursor: pointer;
       position: relative;
       width: 210px;
-      border-radius: 5px;
       height: 120px;
       background: rgb(29, 29, 29);
+      border-radius: 5px;
       margin-top: 30px;
       border-bottom: 2px solid #343434;
       .scene-name {
