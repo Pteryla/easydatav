@@ -12,7 +12,7 @@ const state = () => ({
         subSet: [
           {
             name: '条形图1',
-            icon: '',
+            icon: 'img/components/echarts/barcharts/barchart1.png',
             id: '',
             // 层级索引
             index: 0,
@@ -20,6 +20,7 @@ const state = () => ({
             canBeLower: false,
             componentName: 'EdvBarChart1',
             // 组件样式
+            // public/ 
             componentStyle: {
               containerStyle: {
                 name: '容器样式',
@@ -43,7 +44,7 @@ const state = () => ({
           },
           {
             name: '条形图2',
-            icon: '',
+            icon: 'img/components/echarts/barcharts/barchart1.png',
             id: '',
             index: 0,
             canBeUpper: false,

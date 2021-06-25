@@ -29,7 +29,15 @@
           @mousedown="handleAddComponent($event, item)"
           v-for="item in subSubData.subSet"
           :key="item.id"
+          ondragstart="return false;"
         >
+          <img :src="item.icon" alt="" />
+          <img
+            class="img-drag"
+            v-if="readyAddComponentName === item.componentName"
+            :style="readyAddComponetIconStyle"
+            :src="item.icon"
+          />
           <span class="component-name"> {{ item.name }}</span>
         </div>
       </el-main>
@@ -46,6 +54,15 @@ export default {
   setup() {},
   data() {
     return {
+      readyAddComponetIconStyle: {
+        position: 'fixed',
+        zIndex: 99999,
+        // display: 'none',
+        opacity: 0.4,
+        left: '0px',
+        top: '0px',
+      },
+      readyAddComponentName: '',
       showCateName: 'main',
       subMainDate: null,
       subSubData: null,
@@ -87,15 +104,30 @@ export default {
       this.subSubData = data;
     },
     handleAddComponent(event, component) {
+      event.stopPropagation();
+      this.readyAddComponentName = component.componentName;
       const addComponent = lodash.cloneDeep(component);
-      let move = () => {};
+      const startY = event.clientY;
+      const startX = event.clientX;
+      this.readyAddComponetIconStyle.top = startY - 50 + 'px';
+      this.readyAddComponetIconStyle.left = startX + -50 + 'px';
+      const startTop = parseInt(this.readyAddComponetIconStyle.top);
+      const startLeft = parseInt(this.readyAddComponetIconStyle.left);
+      let move = moveEvent => {
+        const currX = moveEvent.clientX;
+        const currY = moveEvent.clientY;
+        this.readyAddComponetIconStyle.top = currY - startY + startTop + 'px';
+        this.readyAddComponetIconStyle.left = currX - startX + startLeft + 'px';
+      };
       const up = upEvent => {
+        this.readyAddComponentName = '';
         const { top: screenTop, left: screenLeft } = this.screenPosition;
         addComponent.componentStyle.containerStyle.left = upEvent.clientX - 270 - screenLeft;
         addComponent.componentStyle.containerStyle.top = upEvent.clientY - 70 - screenTop;
         setTimeout(() => {
           this['workbench/addComponentToCurrentScene'](addComponent);
         }, 100);
+
         document.removeEventListener('mousemove', move);
         document.removeEventListener('mouseup', up);
       };
@@ -179,6 +211,19 @@ export default {
           top: 10px;
           left: 10px;
           color: #ccc;
+        }
+        img {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+        }
+        .img-drag {
+          overflow: hidden;
+          position: absolute;
+          top: 0;
+          width: 100px;
+          height: 60px;
         }
       }
     }

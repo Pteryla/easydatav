@@ -1,5 +1,5 @@
 <template>
-  <div class="Shape active" :style="getShapeStyle()" @mousedown="handleShapeMove">
+  <div class="Shape active" :class="{ balance: isBalance }" :style="getShapeStyle()" @mousedown="handleShapeMove">
     <span class="rotate el-icon-refresh-right" @mousedown="handleRotate"></span>
     <span class="move iconfont icon-arrows-alt"></span>
     <div
@@ -14,13 +14,17 @@
 </template>
 
 <script>
+// import { getRotatedPointCoordinate } from '@/utils/translate';
+import calculateComponentPositonAndSize from '@/utils/calculateComponentPositonAndSize';
 import { mapState } from 'vuex';
+import { mod360 } from '@/utils/translate';
 export default {
   name: 'Shape',
   components: {},
   setup() {},
   data() {
     return {
+      isBalance: true,
       shapeStyle: {},
       pointsList: ['lt', 't', 'rt', 'r', 'rb', 'b', 'lb', 'l'],
       angleToCursor: [
@@ -34,7 +38,16 @@ export default {
         { start: 248, end: 293, cursor: 'sw' },
         { start: 293, end: 338, cursor: 'w' },
       ],
-      initPointsAngle: {},
+      initialAngle: {
+        lt: 0,
+        t: 45,
+        rt: 90,
+        r: 135,
+        rb: 180,
+        b: 225,
+        lb: 270,
+        l: 315,
+      },
       containerStyle: {
         height: 100,
         width: 300,
@@ -43,11 +56,14 @@ export default {
         rotate: 0,
         backgroundColor: '#111',
       },
+      cursors: {},
     };
   },
   created() {},
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    this.cursors = this.getCursor();
+  },
   unmounted() {},
   watch: {},
   computed: {
@@ -56,6 +72,30 @@ export default {
     }),
   },
   methods: {
+    getCursor() {
+      const { angleToCursor, initialAngle, pointsList, containerStyle } = this;
+      const rotate = mod360(containerStyle.rotate); // 取余 360
+      const result = {};
+      let lastMatchIndex = -1; // 从上一个命中的角度的索引开始匹配下一个，降低时间复杂度
+      pointsList.forEach(point => {
+        const angle = mod360(initialAngle[point] + rotate);
+        const len = angleToCursor.length;
+        // eslint-disable-next-line no-constant-condition
+        while (true) {
+          lastMatchIndex = (lastMatchIndex + 1) % len;
+          const angleLimit = angleToCursor[lastMatchIndex];
+          if (angle < 23 || angle >= 338) {
+            result[point] = 'nw-resize';
+            return;
+          }
+          if (angleLimit.start <= angle && angle < angleLimit.end) {
+            result[point] = angleLimit.cursor + '-resize';
+            return;
+          }
+        }
+      });
+      return result;
+    },
     getShapeStyle() {
       let { height, width, left, top, backgroundColor, rotate } = this.containerStyle;
       return {
@@ -73,10 +113,10 @@ export default {
       const startX = e.clientX;
       const startTop = parseInt(this.containerStyle.top);
       const startLeft = parseInt(this.containerStyle.left);
+      this.cursors = this.getCursor();
       let move = moveEvent => {
         const currX = moveEvent.clientX;
         const currY = moveEvent.clientY;
-
         this.containerStyle.top = currY - startY + startTop;
         this.containerStyle.left = currX - startX + startLeft;
       };
@@ -88,7 +128,6 @@ export default {
       document.addEventListener('mouseup', up);
     },
     getPointStyle(point) {
-      // console.log(point);
       const { width, height } = this.containerStyle;
       const hasT = /t/.test(point);
       const hasB = /b/.test(point);
@@ -114,126 +153,36 @@ export default {
         marginTop: '-4px',
         left: `${newLeft}px`,
         top: `${newTop}px`,
-        // cursor: this.cursors[point],
+        cursor: this.cursors[point],
       };
     },
     handleMouseDownOnPoint(e, point) {
       const { width, height, top, left } = this.containerStyle;
       e.stopPropagation();
-      const startX = e.clientX;
-      const startY = e.clientY;
-
-      // console.log('screenPosition', this.screenPosition);
-      // console.log('containerStyle', this.containerStyle);
-
       const center = {
         x: this.screenPosition.left + 271 + left + width / 2,
         y: this.screenPosition.top + 71 + top + height / 2,
       };
-
-      console.log('center', center);
-
       const clickPoint = {
         x: e.clientX,
         y: e.clientY,
       };
-
-      console.log('clickPoint', clickPoint);
-
       const symmetricPoint = {
         x: center.x - (clickPoint.x - center.x),
         y: center.y - (clickPoint.y - center.y),
       };
-
-      console.log(symmetricPoint);
-
       const move = moveEvent => {
-        const currX = moveEvent.clientX;
-        const currY = moveEvent.clientY;
-        const disY = currY - startY;
-        const disX = currX - startX;
-        const hasT = /t/.test(point);
-        const hasB = /b/.test(point);
-        const hasL = /l/.test(point);
-        const hasR = /r/.test(point);
-        let newHeight = height + (hasT ? -disY : hasB ? disY : 0);
-        let newWidth = width + (hasL ? -disX : hasR ? disX : 0);
-        newHeight = newHeight > 0 ? newHeight : 0;
-        newWidth = newWidth > 0 ? newWidth : 0;
-        const newLeft = left + (hasL ? disX : 0);
-        const newTop = top + (hasT ? disY : 0);
-
-        const curPoint = {
+        const curPositon = {
           x: moveEvent.clientX,
           y: moveEvent.clientY,
         };
-
-        function getCenterPoint(p1, p2) {
-          return {
-            x: p1.x + (p2.x - p1.x) / 2,
-            y: p1.y + (p2.y - p1.y) / 2,
-          };
-        }
-        function angleToRadian(angle) {
-          return (angle * Math.PI) / 180;
-        }
-
-        if (Math.round(this.containerStyle.rotate) === 0) {
-          this.containerStyle.width = newWidth;
-          this.containerStyle.height = newHeight;
-          this.containerStyle.top = newTop;
-          this.containerStyle.left = newLeft;
-        }
-
-        function calculateRotatedPointCoordinate(point, center, rotate) {
-          return {
-            x:
-              (point.x - center.x) * Math.cos(angleToRadian(rotate)) -
-              (point.y - center.y) * Math.sin(angleToRadian(rotate)) +
-              center.x,
-            y:
-              (point.x - center.x) * Math.sin(angleToRadian(rotate)) +
-              (point.y - center.y) * Math.cos(angleToRadian(rotate)) +
-              center.y,
-          };
-        }
-
-        function calculateLeftTop(containerStyle, curPoint, symmetricPoint) {
-          const newCenterPoint = getCenterPoint(curPoint, symmetricPoint);
-          console.log('newCenterPoint', newCenterPoint);
-          const newTopLeftPoint = calculateRotatedPointCoordinate(curPoint, newCenterPoint, -containerStyle.rotate);
-          const newBottomRightPoint = calculateRotatedPointCoordinate(
-            symmetricPoint,
-            newCenterPoint,
-            -containerStyle.rotate,
-          );
-          const newWidth = newBottomRightPoint.x - newTopLeftPoint.x;
-          const newHeight = newBottomRightPoint.y - newTopLeftPoint.y;
-
-          console.log(`calculateLeftTop  newWidth ${newWidth}  newHeight ${newHeight}`);
-          if (newWidth > 0 && newHeight > 0) {
-            return {
-              width: Math.round(newWidth),
-              height: Math.round(newHeight),
-              left: Math.round(newTopLeftPoint.x),
-              top: Math.round(newTopLeftPoint.y),
-            };
-          } else {
-            return null;
-          }
-        }
-        const newPos = calculateLeftTop(this.containerStyle, curPoint, symmetricPoint);
-        if (newPos) {
-          let { left, top, width, height } = newPos;
-          this.containerStyle.width = width;
-          this.containerStyle.height = height;
-          this.containerStyle.top = top;
-          this.containerStyle.left = left;
-
-          console.log('newPos', newPos);
-        }
+        calculateComponentPositonAndSize(point, this.containerStyle, curPositon, {
+          center,
+          clickPoint,
+          symmetricPoint,
+          screenPosition: this.screenPosition,
+        });
       };
-
       const up = () => {
         document.removeEventListener('mousemove', move);
         document.removeEventListener('mouseup', up);
@@ -248,22 +197,49 @@ export default {
       const startY = e.clientY;
       const startX = e.clientX;
       const startRotate = pos.rotate;
-
       const centerX = this.screenPosition.left + 271 + pos.left + pos.width / 2;
       const centerY = this.screenPosition.top + 71 + pos.top + pos.height / 2;
-
       const rotateDegreeBefore = Math.atan2(startY - centerY, startX - centerX) / (Math.PI / 180);
       const move = moveEvent => {
-        const curX = moveEvent.clientX;
-        const curY = moveEvent.clientY;
+        const currX = moveEvent.clientX;
+        const currY = moveEvent.clientY;
         // 旋转后的角度
-        const rotateDegreeAfter = Math.atan2(curY - centerY, curX - centerX) / (Math.PI / 180);
+        const rotateDegreeAfter = Math.atan2(currY - centerY, currX - centerX) / (Math.PI / 180);
+
         // 获取旋转的角度值
-        this.containerStyle.rotate = startRotate + rotateDegreeAfter - rotateDegreeBefore;
+        const endRotate = startRotate + rotateDegreeAfter - rotateDegreeBefore;
+
+        if (Math.round(endRotate - 3) < 0 && Math.round(endRotate + 3) > 0) {
+          this.isBalance = true;
+          this.containerStyle.rotate = 0;
+        } else if (Math.round((endRotate % 360) - 3) < 0 && Math.round((endRotate % 360) + 3) > 0) {
+          this.isBalance = true;
+          this.containerStyle.rotate = 0;
+        } else if (Math.round((endRotate % 360) - 93) < 0 && Math.round((endRotate % 360) + 3) > 90) {
+          this.isBalance = true;
+          this.containerStyle.rotate = 90;
+        } else if (Math.round(endRotate - 3) < 270 && Math.round(endRotate + 3) > 270) {
+          this.isBalance = true;
+          this.containerStyle.rotate = 270;
+        } else if (Math.round(endRotate - 3) < -90 && Math.round(endRotate + 3) > -90) {
+          this.isBalance = true;
+          this.containerStyle.rotate = 270;
+        } else if (Math.round(endRotate - 3) < 90 && Math.round(endRotate + 3) > 90) {
+          this.isBalance = true;
+          this.containerStyle.rotate = 90;
+        } else if (Math.round(endRotate - 3) < 180 && Math.round(endRotate + 3) > 180) {
+          this.isBalance = true;
+          this.containerStyle.rotate = 180;
+        } else {
+          this.isBalance = false;
+          this.containerStyle.rotate = endRotate;
+        }
+        // console.log('endRotate', endRotate);
+
         // 修改当前组件样式
       };
       const up = () => {
-        console.log(this.containerStyle);
+        this.cursors = this.getCursor();
         document.removeEventListener('mousemove', move);
         document.removeEventListener('mouseup', up);
         // this.cursors = this.getCursor() // 根据旋转角度获取光标位置
@@ -312,7 +288,11 @@ export default {
     font-size: 20px;
   }
 }
+
 .active {
-  border: 1px solid #796bf8;
+  border: 1px solid #a599ff;
+}
+.balance {
+  border: 1px solid #14a9ff;
 }
 </style>
