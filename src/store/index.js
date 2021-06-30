@@ -3,7 +3,9 @@ import projects from './projects.js';
 import workbench from './workbench.js';
 import screenComponents from './screenComponents.js';
 export default createStore({
-  state: {},
+  stat() {
+    return {}
+  },
   mutations: {},
   actions: {},
   modules: {
