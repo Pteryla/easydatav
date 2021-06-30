@@ -31,10 +31,10 @@
         <div class="login-box-middle-left"></div>
         <div class="login-box-middle-right"></div>
         <div class="form-box">
-          <div class="header">Welcome! 🍧</div>
+          <div class="header">注册账号</div>
           <div class="inputor">
             <div class="inputor-wrapper">
-              <input spellcheck="false" maxlength="25" type="text" value="" placeholder="Your Account" />
+              <input spellcheck="false" maxlength="24" type="text" value="" placeholder="Your Account" />
             </div>
           </div>
           <div class="inputor">
@@ -42,10 +42,15 @@
               <input spellcheck="false" maxlength="18" type="password" value="" placeholder="Your Password" />
             </div>
           </div>
+          <div class="inputor">
+            <div class="inputor-wrapper">
+              <input spellcheck="false" maxlength="18" type="password" value="" placeholder="Confirm Your Password" />
+            </div>
+          </div>
 
-          <div class="submit-btn-wrapper"><button class="submit-btn">Submit</button></div>
+          <div class="submit-btn-wrapper"><button class="submit-btn">立即注册</button></div>
 
-          <div class="tips-register"><span>没有账号？</span><span class="go-to-register">去注册</span></div>
+          <!-- <div class="tips-register"><span>没有账号？</span><span class="go-to-register">去注册</span></div> -->
         </div>
       </div>
       <div class="login-box-right"></div>
@@ -265,7 +270,7 @@ export default {
         border-radius: 8px;
         transform: translate(-50%, -50%);
         .header {
-          height: 80px;
+          height: 70px;
           line-height: 80px;
           font-weight: 800;
           color: #091032;
