@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 
 const state = () => ({
   // 编辑台屏幕信息
+  visitMode: 'Edit',
   isMouseEnterWorkbench: false,
   screen: {
     position: {
@@ -71,6 +72,9 @@ const state = () => ({
 const getters = {};
 const actions = {};
 const mutations = {
+  setVisitMode(state, val) {
+    state.visitMode = val;
+  },
   // 设置screen组件位置
   setScreenPosition(state, position) {
     const { left, top } = position;

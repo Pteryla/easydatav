@@ -47,7 +47,7 @@
         ></span>
       </div>
       <div class="controllers">
-        <el-button type="primary" size="mini">
+        <el-button @click="navigateTo('Preview')" type="primary" size="mini">
           <i class="el-icon-monitor"></i>
           预览
         </el-button>
@@ -144,6 +144,13 @@ export default {
           top,
         });
       }
+    },
+    navigateTo(pathname) {
+      this.$store.commit('workbench/setVisitMode', 'Preview');
+      console.log(this.$store.state.workbench);
+      this.$router.push({
+        name: pathname,
+      });
     },
   },
 };

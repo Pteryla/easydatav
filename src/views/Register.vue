@@ -50,7 +50,9 @@
 
           <div class="submit-btn-wrapper"><button class="submit-btn">立即注册</button></div>
 
-          <!-- <div class="tips-register"><span>没有账号？</span><span class="go-to-register">去注册</span></div> -->
+          <div class="tips-register">
+            <span>已有账号</span><span class="go-to-register" @click="navigateTo('Login')">去登录</span>
+          </div>
         </div>
       </div>
       <div class="login-box-right"></div>
@@ -70,6 +72,9 @@ export default {
     this.initLines();
   },
   methods: {
+    navigateTo(pathName) {
+      this.$router.push({ name: pathName });
+    },
     initLines() {
       let num = 26;
       let i = 0;
@@ -141,7 +146,6 @@ export default {
   height: 100%;
   min-width: 900px;
   min-height: 700px;
-
   position: relative;
   .login-background {
     position: absolute;
@@ -169,7 +173,6 @@ export default {
     height: 70%;
     max-width: 890px;
     min-width: 800px;
-
     max-height: 550px;
     background-color: #fff;
     border-radius: 8px;
@@ -270,7 +273,7 @@ export default {
         border-radius: 8px;
         transform: translate(-50%, -50%);
         .header {
-          height: 70px;
+          height: 60px;
           line-height: 80px;
           font-weight: 800;
           color: #091032;
@@ -332,7 +335,7 @@ export default {
           width: 100%;
           height: 60px;
           .submit-btn {
-            margin-top: 30px;
+            margin-top: 25px;
             left: 50%;
             transform: translateX(-50%);
             position: absolute;
@@ -353,7 +356,7 @@ export default {
         }
         .tips-register {
           user-select: none;
-          margin-top: 30px;
+          margin-top: 15px;
           font-size: 12px;
           display: flex;
           color: #888888;

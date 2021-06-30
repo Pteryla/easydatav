@@ -192,13 +192,20 @@ export default {
     },
     handleRotate(e) {
       e.stopPropagation();
-
       let pos = this.containerStyle;
       const startY = e.clientY;
       const startX = e.clientX;
       const startRotate = pos.rotate;
-      const centerX = this.screenPosition.left + 271 + pos.left + pos.width / 2;
-      const centerY = this.screenPosition.top + 71 + pos.top + pos.height / 2;
+      let centerX = 0;
+      let centerY = 0;
+      if (this.$store.state.workbench.visitMode === 'Edit') {
+        centerX = this.screenPosition.left + 271 + pos.left + pos.width / 2;
+        centerY = this.screenPosition.top + 71 + pos.top + pos.height / 2;
+      } else if (this.$store.state.workbench.visitMode === 'Preview') {
+        centerX = pos.left + pos.width / 2;
+        centerY = pos.top + pos.height / 2;
+      }
+
       const rotateDegreeBefore = Math.atan2(startY - centerY, startX - centerX) / (Math.PI / 180);
       const move = moveEvent => {
         const currX = moveEvent.clientX;

@@ -45,7 +45,9 @@
 
           <div class="submit-btn-wrapper"><button class="submit-btn">Submit</button></div>
 
-          <div class="tips-register"><span>没有账号？</span><span class="go-to-register">去注册</span></div>
+          <div class="tips-register">
+            <span>没有账号？</span><span class="go-to-register" @click="navigateTo('Register')">去注册</span>
+          </div>
         </div>
       </div>
       <div class="login-box-right"></div>
@@ -65,6 +67,9 @@ export default {
     this.initLines();
   },
   methods: {
+    navigateTo(pathName) {
+      this.$router.push({ name: pathName });
+    },
     initLines() {
       let num = 26;
       let i = 0;
