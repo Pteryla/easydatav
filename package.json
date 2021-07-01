@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "echarts": "^5.1.2",
     "element-plus": "^1.0.2-beta.28",
     "lodash": "^4.17.21",
     "moveable": "^0.25.0",

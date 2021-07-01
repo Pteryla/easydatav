@@ -9,7 +9,7 @@
       @mousedown="handleMouseDownOnPoint($event, item)"
       :key="item"
     ></div>
-    <div class="container">container</div>
+    <slot :container_style="containerStyle"></slot>
   </div>
 </template>
 
@@ -49,8 +49,8 @@ export default {
         l: 315,
       },
       containerStyle: {
-        height: 100,
-        width: 300,
+        height: 400,
+        width: 500,
         left: 30,
         top: 30,
         rotate: 0,

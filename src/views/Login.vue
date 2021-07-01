@@ -34,17 +34,15 @@
           <div class="header">Welcome! 🍧</div>
           <div class="inputor">
             <div class="inputor-wrapper">
-              <input spellcheck="false" maxlength="25" type="text" value="" placeholder="Your Account" />
+              <input spellcheck="false" maxlength="25" type="text" v-model="account" placeholder="Your Account" />
             </div>
           </div>
           <div class="inputor">
             <div class="inputor-wrapper">
-              <input spellcheck="false" maxlength="18" type="password" value="" placeholder="Your Password" />
+              <input spellcheck="false" maxlength="18" type="password" v-model="password" placeholder="Your Password" />
             </div>
           </div>
-
-          <div class="submit-btn-wrapper"><button class="submit-btn">Submit</button></div>
-
+          <div class="submit-btn-wrapper"><button class="submit-btn" @click="login">Submit</button></div>
           <div class="tips-register">
             <span>没有账号？</span><span class="go-to-register" @click="navigateTo('Register')">去注册</span>
           </div>
@@ -61,6 +59,8 @@ export default {
   data() {
     return {
       lines: [],
+      account: '',
+      password: '',
     };
   },
   created() {
@@ -69,6 +69,25 @@ export default {
   methods: {
     navigateTo(pathName) {
       this.$router.push({ name: pathName });
+    },
+    login() {
+      if (!this.account || !this.password) {
+        this.$ElMessage.error('请输入完整的登录信息！');
+        return;
+      }
+      this.axios
+        .post(this.$Api.login, {
+          account: this.account,
+          password: this.password,
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.code === 200) {
+            this.$ElMessage.success('登录成功！');
+          } else if (res.data.code !== 200) {
+            this.$ElMessage.error(`${res.data.msg}`);
+          }
+        });
     },
     initLines() {
       let num = 26;

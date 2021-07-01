@@ -34,21 +34,27 @@
           <div class="header">注册账号</div>
           <div class="inputor">
             <div class="inputor-wrapper">
-              <input spellcheck="false" maxlength="24" type="text" value="" placeholder="Your Account" />
+              <input spellcheck="false" maxlength="24" type="text" v-model="account" placeholder="Your Account" />
             </div>
           </div>
           <div class="inputor">
             <div class="inputor-wrapper">
-              <input spellcheck="false" maxlength="18" type="password" value="" placeholder="Your Password" />
+              <input spellcheck="false" maxlength="18" type="password" v-model="password" placeholder="Your Password" />
             </div>
           </div>
           <div class="inputor">
             <div class="inputor-wrapper">
-              <input spellcheck="false" maxlength="18" type="password" value="" placeholder="Confirm Your Password" />
+              <input
+                spellcheck="false"
+                maxlength="18"
+                type="password"
+                v-model="repassword"
+                placeholder="Confirm Your Password"
+              />
             </div>
           </div>
 
-          <div class="submit-btn-wrapper"><button class="submit-btn">立即注册</button></div>
+          <div class="submit-btn-wrapper"><button class="submit-btn" @click="registerAccount">立即注册</button></div>
 
           <div class="tips-register">
             <span>已有账号</span><span class="go-to-register" @click="navigateTo('Login')">去登录</span>
@@ -66,6 +72,9 @@ export default {
   data() {
     return {
       lines: [],
+      account: '',
+      password: '',
+      repassword: '',
     };
   },
   created() {
@@ -74,6 +83,30 @@ export default {
   methods: {
     navigateTo(pathName) {
       this.$router.push({ name: pathName });
+    },
+    registerAccount() {
+      if (!this.account || !this.password || !this.repassword) {
+        this.$ElMessage.error('请输入完整的注册信息！');
+        return;
+      }
+      if (this.password !== this.repassword) {
+        this.$ElMessage.error('两次输入密码不一致！');
+        return;
+      }
+      this.axios
+        .post(this.$Api.register, {
+          account: this.account,
+          password: this.password,
+          repassword: this.repassword,
+        })
+        .then(res => {
+          console.log(res);
+          if (res.data.code === 200) {
+            this.$ElMessage.success('注册成功！');
+          } else if (res.data.code === 400) {
+            this.$ElMessage.error(`${res.data.msg}`);
+          }
+        });
     },
     initLines() {
       let num = 26;

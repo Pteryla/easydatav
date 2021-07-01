@@ -1,14 +1,12 @@
-
-
-let host = ''
+let host = '';
 
 if (process.env.NODE_ENV === 'production') {
-    host = 'http://localhost'
+  host = 'http://localhost';
 } else {
-    host = 'https://localhost:3000/datav'
+  host = '';
 }
 export default {
-    login: host + '/login',
-    register: host + '/register',
-    projects: host + '/projects'
-}
+  login: host + '/datav/user/login',
+  register: host + '/datav/user/register',
+  projects: host + '/datav/projects',
+};

@@ -1,6 +1,7 @@
 <template>
   <div class="Screen">
-    <Shape></Shape>
+    <Shape> <EdvBarChart1></EdvBarChart1></Shape>
+
     <el-tooltip content="Top center" placement="top">
       <el-button>Dark</el-button>
     </el-tooltip>
@@ -12,9 +13,18 @@
 
 <script>
 import Shape from '../commonComponents/Shape';
+
+const path = require('path');
+const _Components = {};
+const files = require.context('@/components/screenComponents', true, /\.vue$/);
+files.keys().forEach(key => {
+  const name = path.basename(key, '.vue');
+  _Components[name] = files(key).default || files(key);
+});
+
 export default {
   name: 'Screen',
-  components: { Shape },
+  components: { Shape, ..._Components },
   setup() {},
   data() {
     return {};
