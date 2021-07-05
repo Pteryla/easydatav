@@ -1,8 +1,22 @@
 <template>
-  <div class="Shape active" :class="{ balance: isBalance }" :style="getShapeStyle()" @mousedown="handleShapeMove">
-    <span class="rotate el-icon-refresh-right" @mousedown="handleRotate"></span>
-    <span class="move iconfont icon-arrows-alt"></span>
+  <div
+    class="Shape"
+    :class="{
+      active: componentData.id === currentComponentData.id,
+      balance: isBalance && componentData.id === currentComponentData.id,
+    }"
+    @dblclick="handleRemoveComponent(componentData.id)"
+    :style="getShapeStyle()"
+    @mousedown="handleShapeMove"
+  >
+    <span
+      class="rotate el-icon-refresh-right"
+      v-show="componentData.id === currentComponentData.id"
+      @mousedown="handleRotate"
+    ></span>
+    <span class="move iconfont icon-arrows-alt" v-show="componentData.id === currentComponentData.id"></span>
     <div
+      v-show="componentData.id === currentComponentData.id"
       class="point-item"
       v-for="item in pointsList"
       :style="getPointStyle(item)"
@@ -16,10 +30,15 @@
 <script>
 // import { getRotatedPointCoordinate } from '@/utils/translate';
 import calculateComponentPositonAndSize from '@/utils/calculateComponentPositonAndSize';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import { mod360 } from '@/utils/translate';
 export default {
   name: 'Shape',
+  props: {
+    componentData: Object,
+    // containerStyle: Object,
+    currentComponentData: Object,
+  },
   components: {},
   setup() {},
   data() {
@@ -60,7 +79,10 @@ export default {
     };
   },
   created() {},
-  beforeMount() {},
+  beforeMount() {
+    console.log('组件信息', this.componentData);
+    console.log('当前组件信息', this.currentComponentData);
+  },
   mounted() {
     this.cursors = this.getCursor();
   },
@@ -72,6 +94,10 @@ export default {
     }),
   },
   methods: {
+    ...mapMutations(['workbench/removeComponentFromCurrentSceneById', 'workbench/setCurrentComponentData']),
+    handleRemoveComponent(id) {
+      this['workbench/removeComponentFromCurrentSceneById'](id);
+    },
     getCursor() {
       const { angleToCursor, initialAngle, pointsList, containerStyle } = this;
       const rotate = mod360(containerStyle.rotate); // 取余 360
@@ -99,15 +125,16 @@ export default {
     getShapeStyle() {
       let { height, width, left, top, backgroundColor, rotate } = this.containerStyle;
       return {
-        height: height + 'px',
+        transform: `rotate(${rotate}deg) `,
         left: left + 'px',
-        width: width + 'px',
         top: top + 'px',
+        height: height + 'px',
+        width: width + 'px',
         backgroundColor,
-        transform: `rotate(${rotate}deg)`,
       };
     },
     handleShapeMove(e) {
+      this['workbench/setCurrentComponentData'](this.componentData);
       e.stopPropagation();
       const startY = e.clientY;
       const startX = e.clientX;
@@ -157,6 +184,7 @@ export default {
       };
     },
     handleMouseDownOnPoint(e, point) {
+      this['workbench/setCurrentComponentData'](this.componentData);
       const { width, height, top, left } = this.containerStyle;
       e.stopPropagation();
       const center = {
@@ -191,6 +219,7 @@ export default {
       document.addEventListener('mouseup', up);
     },
     handleRotate(e) {
+      this['workbench/setCurrentComponentData'](this.componentData);
       e.stopPropagation();
       let pos = this.containerStyle;
       const startY = e.clientY;
@@ -263,6 +292,7 @@ export default {
 .Shape {
   position: absolute;
   user-select: none;
+  // box-sizing: border-box;
   .point-item {
     position: absolute;
     background: #fff;

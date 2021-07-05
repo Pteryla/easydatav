@@ -1,19 +1,19 @@
 <template>
   <div class="Screen">
-    <Shape> <EdvBarChart1></EdvBarChart1></Shape>
-
-    <el-tooltip content="Top center" placement="top">
-      <el-button>Dark</el-button>
-    </el-tooltip>
-    <el-tooltip content="Bottom center" placement="bottom" effect="light">
-      <el-button>Light</el-button>
-    </el-tooltip>
+    <Shape
+      v-for="item in componentsData"
+      :key="item.id"
+      :componentData="item"
+      :currentComponentData="currentComponentData"
+      :containerStyle="item.componentStyle.containerStyle"
+    >
+      {{ JSON.stringify(item) }}
+    </Shape>
   </div>
 </template>
 
 <script>
-import Shape from '../commonComponents/Shape';
-
+// 导入拖拽组件
 const path = require('path');
 const _Components = {};
 const files = require.context('@/components/screenComponents', true, /\.vue$/);
@@ -22,6 +22,8 @@ files.keys().forEach(key => {
   _Components[name] = files(key).default || files(key);
 });
 
+import { mapState } from 'vuex';
+import Shape from './Shape.vue';
 export default {
   name: 'Screen',
   components: { Shape, ..._Components },
@@ -31,10 +33,18 @@ export default {
   },
   created() {},
   beforeMount() {},
-  mounted() {},
+  mounted() {
+    console.log(this.currentScene);
+  },
   unmounted() {},
   watch: {},
-  computed: {},
+  computed: {
+    ...mapState({
+      currentScene: state => state.workbench.currentScene,
+      componentsData: state => state.workbench.currentScene.componentsData,
+      currentComponentData: state => state.workbench.currentComponentData,
+    }),
+  },
   methods: {},
 };
 </script>

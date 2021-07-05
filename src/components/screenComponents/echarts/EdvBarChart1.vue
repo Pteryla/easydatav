@@ -9,9 +9,7 @@ import * as echarts from 'echarts';
 export default {
   name: 'EdvBarChart1',
   components: {},
-  props: {
-    containerStyle: Object,
-  },
+  props: {},
   setup() {},
   data() {
     return {};
@@ -20,22 +18,9 @@ export default {
   beforeMount() {},
   mounted() {
     this.initEcharts();
-    console.log(this.containerStyle);
   },
   unmounted() {},
-  watch: {
-    containerStyle: {
-      deep: true,
-      handler: function() {
-        console.log(this.containerStyle);
-        let mychartDom = document.getElementById('unique-echart');
-        let mychart = echarts.getInstanceByDom(mychartDom);
-        if (mychart) {
-          mychart.resize();
-        }
-      },
-    },
-  },
+  watch: {},
   computed: {},
   methods: {
     initEcharts() {

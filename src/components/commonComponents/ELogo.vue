@@ -1,24 +1,19 @@
 <template>
-  <div class="e-logo">MyDataV</div>
+  <div class="e-logo">iEasyDataV</div>
 </template>
 
 <script>
 // iEasyDataV
 export default {
   name: 'ELogo',
-  setup() {
-  },
+  setup() {},
   data() {
     return {};
   },
-  created() {
-  },
-  beforeMount() {
-  },
-  mounted() {
-  },
-  unmounted() {
-  },
+  created() {},
+  beforeMount() {},
+  mounted() {},
+  unmounted() {},
   watch: {},
   methods: {},
 };
@@ -37,7 +32,7 @@ export default {
   user-select: none;
   background-clip: text;
   color: transparent;
-  //animation: flashColor 8s linear infinite;
+  animation: flashColor 8s linear infinite;
   @keyframes flashColor {
     100% {
       background-position: -400% 0;

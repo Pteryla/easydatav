@@ -153,6 +153,41 @@ const mutations = {
   setMouseEnterWorkbenchStatus(state, status) {
     state.isMouseEnterWorkbench = status;
   },
+  setCurrentComponentData(state, component) {
+    console.log('尝试更新当前选中组件数据');
+    // 判断当前组件id是否与设置组件的id一致，如果不一致则替换数据
+    if (state.currentComponentData.id !== component.id) {
+      state.currentComponentData = component;
+      console.log('成功更新当前选中组件数据');
+    }
+  },
+  // 修改当前选中组件的数据 数据合并
+  modCurrentComponentData(state, dataObject) {
+    for (let key in dataObject) {
+      if (Object.keys(dataObject[key]).length >= 1 && typeof dataObject[key] === 'object') {
+        for (let subKey in dataObject[key]) {
+          if (Object.keys(dataObject[key][subKey]).length >= 1 && typeof dataObject[key][subKey] === 'object') {
+            for (let subKey2 in dataObject[key][subKey]) {
+              if (
+                Object.keys(dataObject[key][subKey][subKey2]).length >= 1 &&
+                typeof dataObject[key][subKey][subKey2] === 'object'
+              ) {
+                for (let subKey3 in dataObject[key][subKey][subKey2]) {
+                  state.currentComponentData[key][subKey][subKey2][subKey3] = dataObject[key][subKey][subKey2][subKey3];
+                }
+              } else {
+                state.currentComponentData[key][subKey][subKey2] = dataObject[key][subKey][subKey2];
+              }
+            }
+          } else {
+            state.currentComponentData[key][subKey] = dataObject[key][subKey];
+          }
+        }
+      } else {
+        state.currentComponentData[key] = dataObject[key];
+      }
+    }
+  },
 };
 
 export default {
