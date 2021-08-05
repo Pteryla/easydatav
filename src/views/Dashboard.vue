@@ -1,6 +1,6 @@
 <template>
-  <div class="Workbench">
-    Workbench
+  <div class="Dashboard">
+    Dashboard
   </div>
 </template>
 
@@ -8,15 +8,17 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "Workbench",
-  components: {},
-  setup() {},
+  name: "Dashboard",
+  components: {
+  },
+  setup() {
+  }
 });
 </script>
 
 <style lang="scss" scoped>
-.Workbench {
-  width: 100%;
-  height: 100%;
+.Dashboard{
+    width: 100%;
+    height: 100%;
 }
 </style>

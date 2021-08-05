@@ -1,29 +1,24 @@
-# ieasydatav
+# easydatav
 
 ## Project setup
-
 ```
-pnpm install
+yarn install
 ```
 
 ### Compiles and hot-reloads for development
-
 ```
-pnpm serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
-
 ```
-pnpm build
+yarn build
 ```
 
 ### Lints and fixes files
-
 ```
-pnpm lint
+yarn lint
 ```
 
 ### Customize configuration
-
 See [Configuration Reference](https://cli.vuejs.org/config/).

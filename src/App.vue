@@ -2,23 +2,25 @@
   <router-view />
 </template>
 
-<script>
-export default {
-  name: 'App',
-  components: {},
-  mounted() {},
-  methods: {},
-};
-</script>
+<script lang="ts">
+import { defineComponent, computed } from "vue";
+import { useStore } from "vuex";
+import { key } from "@/store";
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: $font-color-base;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-}
-</style>
+export default defineComponent({
+  setup() {
+    console.log("The App setup function");
+    const store = useStore(key);
+    const count = computed(() => store.state.count);
+    console.log(store.state.todo?.todos);
+    console.log(store);
+    return {
+      count,
+    };
+  },
+  mounted() {
+    console.log("The App has been mounted");
+    console.log(this.$store.state);
+  },
+});
+</script>
